@@ -219,4 +219,5 @@ pip-log.txt
 # INTELLIJ #
 ############
 
-.idea
+.idea/
+out/
