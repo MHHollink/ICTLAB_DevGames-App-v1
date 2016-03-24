@@ -19,7 +19,7 @@ import retrofit.http.Path;
 public interface DevGamesClient {
 
     @FormUrlEncoded
-    @POST("/login/index.php")
+    @POST("/login")
     Map<String, String> login(@Field("username") String user, @Field("password") String pass);
 
     @GET("/user")

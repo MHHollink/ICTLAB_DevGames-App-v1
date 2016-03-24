@@ -19,8 +19,7 @@ import baecon.devgames.util.Utils;
 @DatabaseTable(tableName = "users")
 public class User extends AbsSynchronizable implements Serializable {
 
-    public static class Column {
-
+    public static class Column{
         public static final String USERNAME = "username";
         public static final String GIT_USER = "git_username";
         public static final String PROJECTS = "projects";

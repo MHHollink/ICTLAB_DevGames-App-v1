@@ -35,12 +35,12 @@ public class UserDTO implements ModelDTO<User> {
         user.setGitUsername(gitUsername);
         user.setGcmKey(gcmkey);
 
-        for (ProjectDTO dto : projectDTOs) {
-            user.addProject(dto.toModel());
-        }
-        for (CommitDTO dto : commitDTOs) {
-            user.addCommit(dto.toModel());
-        }
+//        for (ProjectDTO dto : projectDTOs) {
+//            user.addProject(dto.toModel());
+//        }
+//        for (CommitDTO dto : commitDTOs) {
+//            user.addCommit(dto.toModel());
+//        }
 
         return user;
     }
