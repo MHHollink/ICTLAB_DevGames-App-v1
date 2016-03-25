@@ -218,7 +218,6 @@ public abstract class AbsModelManager
      * Starts a one shot poll.
      */
     public void poke() {
-
         L.v("*yawn*, pass me some coffee! Let's see how much work their is to do");
 
         startPoll();

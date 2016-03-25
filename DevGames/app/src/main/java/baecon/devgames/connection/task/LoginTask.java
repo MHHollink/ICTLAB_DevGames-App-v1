@@ -89,7 +89,7 @@ public class LoginTask extends RESTTask< Void, Void, Integer> {
         // Check if the userUuid stored in the database matches the given userUuid from the LoginActivity.
         // If they match, keep all the data. Otherwise, first delete all data before continuing
         try {
-            Setting dbUsername = settingDao.queryForId(Setting.USER_ID);
+            Setting dbUsername = settingDao.queryForId(Setting.USERNAME);
             if (dbUsername != null && dbUsername.getValue() != null
                     && username != null
                     && dbUsername.getValue().equals(username)) {
@@ -97,7 +97,7 @@ public class LoginTask extends RESTTask< Void, Void, Integer> {
 
             }
             else {
-                L.w("The user stored in the database does not match the given userUuid from the " +
+                L.w("The user stored in the database does not match the given userid from the " +
                         "LoginActivity! Deleting all the data...");
 
                 for (Class<?> clz : DatabaseConfigUtil.CLASSES) {

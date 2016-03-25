@@ -7,10 +7,11 @@ import baecon.devgames.connection.synchronization.UserManager;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.database.modelupdate.Operation;
 import baecon.devgames.events.BusProvider;
+import baecon.devgames.events.user.UserPushScheduledEvent;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
 import baecon.devgames.util.L;
-import baecon.devgames.util.Utils;
+
 import com.j256.ormlite.dao.Dao;
 
 import java.io.Serializable;
@@ -84,7 +85,7 @@ public class SaveUserTask extends ModelCUDTask<User, UserUpdate> {
 
         if (getModelUpdate() != null && result != null) {
             UserManager.get(context).offerUpdate(getModelUpdate());
-            //TODO BusProvider.getBus().post(new UserPushScheduledEvent(getModelUpdate(), result == UPDATED));
+            BusProvider.getBus().post(new UserPushScheduledEvent(getModelUpdate(), result == UPDATED));
         }
         else {
             L.w("UserUpdate not scheduled! User was null or a local database error occurred");

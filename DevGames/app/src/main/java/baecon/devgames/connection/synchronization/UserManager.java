@@ -12,20 +12,17 @@ import baecon.devgames.connection.client.dto.UserDTO;
 import baecon.devgames.connection.task.poll.ModelPollTask;
 import baecon.devgames.connection.task.poll.PollRelatedUsersTask;
 import baecon.devgames.connection.task.poll.PollUserTask;
-import baecon.devgames.connection.task.push.ModelPushTask;
+import baecon.devgames.connection.task.push.PushUserTask;
 import baecon.devgames.database.modelupdate.Operation;
 import baecon.devgames.database.task.SaveUserTask;
 import baecon.devgames.events.BusProvider;
 import baecon.devgames.events.PushTaskDoneEvent;
-import baecon.devgames.events.UserPushTaskDoneEvent;
-import baecon.devgames.model.ISynchronizable;
+import baecon.devgames.events.user.UserPushTaskDoneEvent;
+import baecon.devgames.events.user.UsersUpdatedEvent;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
 import baecon.devgames.util.L;
 
-/**
- * Created by Marcel on 13-3-2016.
- */
 public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, PushTaskDoneEvent>{
 
     private static UserManager instance;
@@ -93,8 +90,8 @@ public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, Push
     }
 
     @Override
-    protected ModelPushTask<User, UserUpdate> newUpdateTask(DevGamesApplication app, Long id) {
-        return null;
+    protected PushUserTask newUpdateTask(DevGamesApplication app, Long id) {
+        return new PushUserTask(app, id);
     }
 
     @Override
@@ -125,6 +122,11 @@ public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, Push
     @Subscribe
     public void onUpdateTaskDoneEvent(UserPushTaskDoneEvent event) {
         super.onUpdateTaskDoneEvent(event);
+    }
+
+    @Subscribe
+    public void onUsersUpdatedEvent(UsersUpdatedEvent event) {
+
     }
 
 }

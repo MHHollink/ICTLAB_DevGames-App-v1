@@ -10,14 +10,11 @@ import java.util.List;
 import baecon.devgames.connection.client.DevGamesClient;
 import baecon.devgames.connection.client.dto.UserDTO;
 import baecon.devgames.connection.synchronization.AbsModelManager;
-import baecon.devgames.connection.synchronization.UserManager;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.events.SynchronizableModelUpdatedEvent;
-import baecon.devgames.events.UsersUpdatedEvent;
-import baecon.devgames.model.Project;
+import baecon.devgames.events.user.UsersUpdatedEvent;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
-import baecon.devgames.util.Utils;
 
 /**
  * Created by Marcel on 16-3-2016.

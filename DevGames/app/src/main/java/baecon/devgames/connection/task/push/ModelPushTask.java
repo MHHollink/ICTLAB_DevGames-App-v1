@@ -348,21 +348,21 @@ public abstract class ModelPushTask<ModelClass extends ISynchronizable, ModelUpd
          *
          * @return Returns a fresh instance of a {@link PushTaskDoneEvent}.
          */
-        abstract PushTaskDoneEvent pushTaskDoneEvent(Long id, boolean success);
+        abstract PushTaskDoneEvent pushTaskDoneEvent(long id, boolean success);
 
         /**
          * Returns a fresh instance of a {@link PushTaskDoneEvent}.
          *
          * @return Returns a fresh instance of a {@link PushTaskDoneEvent}.
          */
-        abstract PushTaskDoneEvent pushTaskDoneEvent(Long id, boolean success, int statusCode);
+        abstract PushTaskDoneEvent pushTaskDoneEvent(long id, boolean success, int statusCode);
 
         /**
          * Returns a fresh instance of a {@link PushTaskDoneEvent}.
          *
          * @return A fresh instance of an {@link PushTaskDoneEvent}.
          */
-        abstract PushTaskDoneEvent pushTaskDoneEvent(Long id, boolean success, int statusCode,
+        abstract PushTaskDoneEvent pushTaskDoneEvent(long id, boolean success, int statusCode,
                                                      IModelUpdate lastUnsuccessfulUpdate,
                                                      Response lastUnsuccessfulUpdateResponse);
 
@@ -371,7 +371,7 @@ public abstract class ModelPushTask<ModelClass extends ISynchronizable, ModelUpd
          *
          * @return A fresh instance of a {@link PushDoneEvent}.
          */
-        abstract PushDoneEvent pushDoneEvent(long updateId, String uuid);
+        abstract PushDoneEvent pushDoneEvent(long updateId, long uuid);
 
         /**
          * Returns a fresh instance of a {@link PushDoneEvent}.

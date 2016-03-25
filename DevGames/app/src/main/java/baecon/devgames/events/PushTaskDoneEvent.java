@@ -12,7 +12,7 @@ public abstract class PushTaskDoneEvent {
     /**
      * The local database id of the model where this update is related to.
      */
-    public final String localModelId;
+    public final long localModelId;
 
     /**
      * Whether all {@linkplain IModelUpdate}s have been executed successfully
@@ -36,15 +36,15 @@ public abstract class PushTaskDoneEvent {
      */
     public final Response lastUnsuccessfulUpdateResponse;
 
-    public PushTaskDoneEvent(String localModelId, boolean success) {
+    public PushTaskDoneEvent(long localModelId, boolean success) {
         this(localModelId, success, 0, null, null);
     }
 
-    public PushTaskDoneEvent(String localModelId, boolean success, int statusCode) {
+    public PushTaskDoneEvent(long localModelId, boolean success, int statusCode) {
         this(localModelId, success, statusCode, null, null);
     }
 
-    public PushTaskDoneEvent(String localModelId, boolean success, int statusCode, IModelUpdate lastUnsuccessfulUpdate, Response lastUnsuccessfulUpdateResponse) {
+    public PushTaskDoneEvent(long localModelId, boolean success, int statusCode, IModelUpdate lastUnsuccessfulUpdate, Response lastUnsuccessfulUpdateResponse) {
         this.localModelId = localModelId;
         this.success = success;
         this.statusCode = statusCode;
