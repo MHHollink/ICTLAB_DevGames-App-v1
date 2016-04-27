@@ -4,8 +4,8 @@ import android.app.Application;
 
 import java.io.Serializable;
 
-import baecon.devgames.model.ISynchronizable;
 import baecon.devgames.database.modelupdate.IModelUpdate;
+import baecon.devgames.model.ISynchronizable;
 
 /**
  * A class that manages the {@link Model}. It is the main entrance point for persisting and synchronizing the Model.

@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import baecon.devgames.BuildConfig;
+import baecon.devgames.DevGamesApplication;
+import baecon.devgames.connection.client.dto.UserDTO;
 import baecon.devgames.connection.synchronization.UserManager;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.model.Setting;
@@ -84,7 +86,7 @@ public class GcmRegistrationTask extends RESTTask<Void, Void, String> {
         try {
             newGCMKey = gcm.register(BuildConfig.GCM_SENDER_ID);
             L.d("Registered to GCM, GCMKey : {0}", newGCMKey);
-            return REGISTERED;
+
         }
         catch (IOException e) {
 
@@ -93,6 +95,14 @@ public class GcmRegistrationTask extends RESTTask<Void, Void, String> {
 
             return ERROR_GCM_REGISTER_ERROR;
         }
+
+        // TODO : fix this dirty hack to get the GCM token to save in the backend
+        UserDTO updatedUser = new UserDTO(loggedInUser);
+        updatedUser.setGcmId(newGCMKey);
+        createService().updateUser(updatedUser,DevGamesApplication.get(context).getLoggedInUser().getId() );
+        // TODO : fix this dirty hack to get the GCM token to save in the backend
+
+        return REGISTERED;
     }
 
     @Override

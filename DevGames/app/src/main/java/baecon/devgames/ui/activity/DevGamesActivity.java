@@ -14,6 +14,7 @@ import com.squareup.otto.Subscribe;
 
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.R;
+import baecon.devgames.connection.synchronization.UserManager;
 import baecon.devgames.connection.task.LogoutTask;
 import baecon.devgames.events.BusProvider;
 import baecon.devgames.events.LogoutEvent;
@@ -57,6 +58,7 @@ public abstract class DevGamesActivity extends AppCompatActivity {
         doLoginCheck();
 
         BusProvider.getBus().register(this);
+        UserManager.get(this).init();
     }
 
     /**
@@ -70,6 +72,7 @@ public abstract class DevGamesActivity extends AppCompatActivity {
         L.d("* onPause");
 
         BusProvider.getBus().unregister(this);
+        UserManager.get(this).shutdown();
     }
 
     @Override

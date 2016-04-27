@@ -2,12 +2,11 @@ package baecon.devgames.database.modelupdate;
 
 import android.content.Context;
 
+import java.sql.SQLException;
+
 import baecon.devgames.connection.client.DevGamesClient;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.model.ISynchronizable;
-
-import java.sql.SQLException;
-
 import retrofit.client.Response;
 
 /**

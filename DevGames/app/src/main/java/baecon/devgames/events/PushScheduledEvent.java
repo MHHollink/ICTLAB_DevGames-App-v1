@@ -1,7 +1,6 @@
 package baecon.devgames.events;
 
 import baecon.devgames.database.modelupdate.IModelUpdate;
-import baecon.devgames.model.update.UserUpdate;
 
 /**
  * An event indicating that a {@link IModelUpdate} has been successfully scheduled for

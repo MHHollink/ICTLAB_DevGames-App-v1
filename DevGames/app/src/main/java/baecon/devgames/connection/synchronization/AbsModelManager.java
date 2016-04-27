@@ -5,21 +5,21 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
-import baecon.devgames.DevGamesApplication;
-import baecon.devgames.connection.task.poll.ModelPollTask;
-import baecon.devgames.connection.task.push.ModelPushTask;
-import baecon.devgames.connection.client.dto.ModelDTO;
-import baecon.devgames.events.PushTaskDoneEvent;
-import baecon.devgames.model.AbsSynchronizable;
-import baecon.devgames.database.modelupdate.IModelUpdate;
-import baecon.devgames.model.update.AbsModelUpdate;
-import baecon.devgames.util.L;
-import baecon.devgames.util.Utils;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
+
+import baecon.devgames.DevGamesApplication;
+import baecon.devgames.connection.client.dto.ModelDTO;
+import baecon.devgames.connection.task.poll.ModelPollTask;
+import baecon.devgames.connection.task.push.ModelPushTask;
+import baecon.devgames.database.modelupdate.IModelUpdate;
+import baecon.devgames.events.PushTaskDoneEvent;
+import baecon.devgames.model.AbsSynchronizable;
+import baecon.devgames.model.update.AbsModelUpdate;
+import baecon.devgames.util.L;
+import baecon.devgames.util.Utils;
 
 public abstract class AbsModelManager
         <
@@ -171,8 +171,6 @@ public abstract class AbsModelManager
     protected void launchAsyncTask(long id) {
         L.v("{1}, localModelId {0}", id, getClass().getSimpleName());
 
-        // TODO: check if local model id is > 0
-
         if (modelUpdateTasks == null) {
             modelUpdateTasks = new HashMap<>();
         }
@@ -183,7 +181,6 @@ public abstract class AbsModelManager
             L.d("syncTask was null or getStatus==FINISHED. Creating new ModelUpdateTask");
             syncTask = newUpdateTask(app, id);
             modelUpdateTasks.put(id, syncTask);
-            return;
         }
 
         switch (syncTask.getStatus()) {

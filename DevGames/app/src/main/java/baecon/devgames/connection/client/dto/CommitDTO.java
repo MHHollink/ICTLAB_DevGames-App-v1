@@ -18,7 +18,7 @@ public class CommitDTO implements ModelDTO<Commit> {
 
     @Override
     public Long getId() {
-        return null;
+        return id;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package baecon.devgames.connection.client;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -22,30 +21,20 @@ public interface DevGamesClient {
     @POST("/login")
     Map<String, String> login(@Field("username") String user, @Field("password") String pass);
 
-    @GET("/user")
-    UserDTO getCurrentUser();
+    @GET("/users")
+    UserDTO getCurrentlyLoggedInUser();
 
-    @GET("/user/{id}")
-    UserDTO getUser(@Path("id") Long uuid);
+    @PUT("/users/{id}")
+    Response updateUser(@Body UserDTO user, @Path("id") Long id);
 
-    @GET("/user/{id}/projects")
-    List<ProjectDTO> getProjectsOfUser(@Path("id") String uuid);
+    @GET("/users/{id}")
+    UserDTO getUserById(@Path("id") Long id);
 
-    @GET("/user/{id}/commits")
-    List<CommitDTO> getCommitsOfUser(@Path("id") String uuid);
+    @GET("/users/{id}/projects")
+    List<ProjectDTO> getProjectsOfUser(@Path("id") Long id);
 
-    /**
-     * Changes one or more attributes of the currently logged in user.
-     *
-     * example : GCM key
-     *
-     * @param user
-     *         The user to save.
-     *
-     * @return an HTTP response of the request.
-     */
-    @PUT("/user")
-    Response changeOwnUser(@Body UserDTO user);
+    @GET("/users/{id}/commits")
+    List<CommitDTO> getCommitsOfUser(@Path("id") Long id);
 
     List<UserDTO> getUsers(Long projectId);
 }

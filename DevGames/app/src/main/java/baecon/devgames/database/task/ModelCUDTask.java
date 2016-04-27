@@ -3,17 +3,17 @@ package baecon.devgames.database.task;
 
 import android.content.Context;
 
-import baecon.devgames.database.modelupdate.IModelUpdate;
-import baecon.devgames.database.modelupdate.Operation;
-import baecon.devgames.model.ISynchronizable;
-import baecon.devgames.util.L;
-import baecon.devgames.util.Utils;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.UpdateBuilder;
 
 import java.io.Serializable;
 import java.sql.SQLException;
-import java.util.UUID;
+
+import baecon.devgames.database.modelupdate.IModelUpdate;
+import baecon.devgames.database.modelupdate.Operation;
+import baecon.devgames.model.ISynchronizable;
+import baecon.devgames.util.L;
+import baecon.devgames.util.Utils;
 
 import static baecon.devgames.model.ISynchronizable.State;
 

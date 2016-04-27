@@ -1,7 +1,5 @@
 package baecon.devgames.connection.client.dto;
 
-import android.text.TextUtils;
-
 import java.util.Set;
 
 import baecon.devgames.model.User;
@@ -9,11 +7,21 @@ import baecon.devgames.model.User;
 public class UserDTO implements ModelDTO<User> {
 
     private Long id;
-    private String username;
-    private String gitUsername;
-    private Set<ProjectDTO> projectDTOs;
-    private Set<CommitDTO> commitDTOs;
-    private String gcmkey;
+    public String username;
+    public String gitUsername;
+
+    public String firstName;
+    public String tween;
+    public String lastName;
+
+    public int age;
+    public String mainJob;
+
+    public Set<ProjectDTO> projects;
+    public Set<PushDTO> pushes;
+
+    public String session;
+    public String gcmId;
 
     public UserDTO(User user){
         id = user.getId();
@@ -33,32 +41,37 @@ public class UserDTO implements ModelDTO<User> {
         user.setId(id);
         user.setUsername(username);
         user.setGitUsername(gitUsername);
-        user.setGcmKey(gcmkey);
+        user.setGcmKey(gcmId);
+        user.setAge(age);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
 
-//        for (ProjectDTO dto : projectDTOs) {
-//            user.addProject(dto.toModel());
-//        }
-//        for (CommitDTO dto : commitDTOs) {
-//            user.addCommit(dto.toModel());
-//        }
 
         return user;
     }
 
-    public Long getId() {
-        return id;
+    public int getAge() {
+        return age;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getGcmId() {
+        return gcmId;
+    }
+
+    public void setGcmId(String gcmId) {
+        this.gcmId = gcmId;
     }
 
     public String getGitUsername() {
@@ -69,39 +82,68 @@ public class UserDTO implements ModelDTO<User> {
         this.gitUsername = gitUsername;
     }
 
-    public Set<ProjectDTO> getProjectDTOs() {
-        return projectDTOs;
-    }
-
-    public void setProjectDTOs(Set<ProjectDTO> projectDTOs) {
-        this.projectDTOs = projectDTOs;
-    }
-
-    public Set<CommitDTO> getCommitDTOs() {
-        return commitDTOs;
-    }
-
-    public void setCommitDTOs(Set<CommitDTO> commitDTOs) {
-        this.commitDTOs = commitDTOs;
-    }
-
-    public String getGcmkey() {
-        return gcmkey;
-    }
-
-    public void setGcmkey(String gcmkey) {
-        this.gcmkey = gcmkey;
-    }
-
     @Override
-    public String toString() {
-        return "UserDTO{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", gitUsername='" + gitUsername + '\'' +
-                ", projectDTOs=" + projectDTOs +
-                ", commitDTOs=" + commitDTOs +
-                ", gcmkey='" + gcmkey + '\'' +
-                '}';
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMainJob() {
+        return mainJob;
+    }
+
+    public void setMainJob(String mainJob) {
+        this.mainJob = mainJob;
+    }
+
+    public Set<ProjectDTO> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<ProjectDTO> projects) {
+        this.projects = projects;
+    }
+
+    public Set<PushDTO> getPushes() {
+        return pushes;
+    }
+
+    public void setPushes(Set<PushDTO> pushes) {
+        this.pushes = pushes;
+    }
+
+    public String getSession() {
+        return session;
+    }
+
+    public void setSession(String session) {
+        this.session = session;
+    }
+
+    public String getTween() {
+        return tween;
+    }
+
+    public void setTween(String tween) {
+        this.tween = tween;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

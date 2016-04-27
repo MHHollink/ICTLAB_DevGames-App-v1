@@ -121,7 +121,7 @@ public class LoginTask extends RESTTask< Void, Void, Integer> {
                 application.setSession(session);
 
                 try {
-                    UserDTO dto = client.getCurrentUser();
+                    UserDTO dto = client.getCurrentlyLoggedInUser();
 
                     User loggedInUser = dto.toModel();
 

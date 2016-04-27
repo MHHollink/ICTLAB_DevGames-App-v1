@@ -38,11 +38,24 @@ public class MainActivity extends DevGamesActivity {
 
         ViewPageAdapter viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
 
-        viewPageAdapter.addTab(
-                new ProfileFragment().setTitle(DevGamesApplication.get(this).getString(R.string.profile)),
-                new ProjectsFragment().setTitle(DevGamesApplication.get(this).getString(R.string.project))
+        // Create Profile TAB
+        ProfileFragment profile = new ProfileFragment();
+        profile.setTitle(DevGamesApplication.get(this).getString(R.string.profile));
+        Bundle args = new Bundle(1);
+        args.putLong(
+                ProfileFragment.USER_LOCAL_ID,
+                DevGamesApplication.get(this).getLoggedInUser().getId()
         );
+        profile.getFragment().setArguments(args);
 
+        // Create Projects Tab
+        ProjectsFragment projects = new ProjectsFragment();
+        projects.setTitle(DevGamesApplication.get(this).getString(R.string.project));
+
+        // Add pages to the viewpager
+        viewPageAdapter.addTab(
+                profile //, projects
+        );
 
         adapter = (ViewPager) findViewById(R.id.activity_main_viewpager);
         adapter.setAdapter(viewPageAdapter);

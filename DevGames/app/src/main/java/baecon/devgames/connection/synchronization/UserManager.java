@@ -1,11 +1,14 @@
 package baecon.devgames.connection.synchronization;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 
 import com.squareup.otto.Subscribe;
 
 import java.io.Serializable;
+import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.connection.client.dto.UserDTO;
@@ -18,7 +21,6 @@ import baecon.devgames.database.task.SaveUserTask;
 import baecon.devgames.events.BusProvider;
 import baecon.devgames.events.PushTaskDoneEvent;
 import baecon.devgames.events.user.UserPushTaskDoneEvent;
-import baecon.devgames.events.user.UsersUpdatedEvent;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
 import baecon.devgames.util.L;
@@ -59,11 +61,6 @@ public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, Push
         BusProvider.getBus().unregister(this);
     }
 
-    @Override
-    protected ModelPollTask<User, UserUpdate, UserDTO> newPollTask(Context context) {
-        return new PollRelatedUsersTask(context, this);
-    }
-
     public void pollUnknownUser(final Long userId) {
         getUIThreadHandler().post(new Runnable() {
             @Override
@@ -74,29 +71,38 @@ public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, Push
     }
 
     @Override
+    protected PushUserTask newUpdateTask(DevGamesApplication app, Long id) {
+        return new PushUserTask(app, id);
+    }
+
+    @Override
+    protected ModelPollTask<User, UserUpdate, UserDTO> newPollTask(Context context) {
+        return new PollRelatedUsersTask(context, this);
+    }
+
+    @Override
+    protected Executor getPollExecutor() {
+        return AsyncTask.SERIAL_EXECUTOR;
+    }
+
+    @Override
     public long getBackgroundPollingInterval() {
         return 0; // We do not poll
     }
 
     @Override
     public long getForegroundPollingInterval() {
-
-        return 0; // We do not poll
-    }
-
-    @Override
-    public boolean isInForegroundSyncMode() {
-        return false;
-    }
-
-    @Override
-    protected PushUserTask newUpdateTask(DevGamesApplication app, Long id) {
-        return new PushUserTask(app, id);
+        return TimeUnit.MINUTES.toMillis(2L);
     }
 
     @Override
     public boolean isAllowedToSyncInBackground() {
-        return false;
+        return true;
+    }
+
+    @Override
+    public boolean isInForegroundSyncMode() {
+        return true;
     }
 
     @Override
@@ -123,10 +129,4 @@ public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, Push
     public void onUpdateTaskDoneEvent(UserPushTaskDoneEvent event) {
         super.onUpdateTaskDoneEvent(event);
     }
-
-    @Subscribe
-    public void onUsersUpdatedEvent(UsersUpdatedEvent event) {
-
-    }
-
 }

@@ -13,12 +13,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.R;
 import baecon.devgames.connection.task.LogoutTask;
-import baecon.devgames.ui.activity.DevGamesActivity;
 import baecon.devgames.ui.activity.LoginActivity;
 import baecon.devgames.ui.activity.MainActivity;
 import baecon.devgames.util.L;

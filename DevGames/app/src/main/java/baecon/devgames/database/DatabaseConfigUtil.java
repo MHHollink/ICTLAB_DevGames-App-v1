@@ -8,7 +8,10 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import baecon.devgames.model.Commit;
+import baecon.devgames.model.Duplication;
+import baecon.devgames.model.Issue;
 import baecon.devgames.model.Project;
+import baecon.devgames.model.Push;
 import baecon.devgames.model.Setting;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
@@ -59,9 +62,13 @@ public class DatabaseConfigUtil extends OrmLiteConfigUtil {
 
             Project.class,
 
+            Push.class,
 
             Commit.class,
 
+            Issue.class,
+
+//            Duplication.class,
 
             Setting.class
     };

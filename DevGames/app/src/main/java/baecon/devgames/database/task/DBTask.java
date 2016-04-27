@@ -2,6 +2,8 @@ package baecon.devgames.database.task;
 
 import android.content.Context;
 
+import java.sql.SQLException;
+
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.model.ISynchronizable;
@@ -9,8 +11,6 @@ import baecon.devgames.model.Setting;
 import baecon.devgames.model.User;
 import baecon.devgames.util.L;
 import baecon.devgames.util.MultiThreadedAsyncTask;
-
-import java.sql.SQLException;
 
 /**
  * A base class for asynchronous database calls.

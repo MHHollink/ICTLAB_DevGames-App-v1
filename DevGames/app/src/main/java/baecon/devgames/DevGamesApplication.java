@@ -20,7 +20,6 @@ import baecon.devgames.model.Setting;
 import baecon.devgames.model.User;
 import baecon.devgames.util.L;
 import baecon.devgames.util.PreferenceManager;
-
 import retrofit.Endpoint;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;

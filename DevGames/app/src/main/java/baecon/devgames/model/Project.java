@@ -5,18 +5,15 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 
 @DatabaseTable(tableName = "projects")
 public class Project extends AbsSynchronizable implements Serializable {
 
     public static class Column {
-
         public static final String OWNER = "owner";
         public static final String DEVELOPERS = "developers";
-        public static final String COMMITS = "commits";
+        public static final String PUSHES = "pushes";
         public static final String NAME = "name";
         public static final String DESCRIPTION = "description";
     }
@@ -26,8 +23,8 @@ public class Project extends AbsSynchronizable implements Serializable {
     @DatabaseField(columnName = Column.DEVELOPERS, dataType = DataType.SERIALIZABLE)
     private HashMap<Long, User> developers;
 
-    @DatabaseField(columnName = Column.COMMITS, dataType = DataType.SERIALIZABLE)
-    private HashMap<Long, Commit> commits;
+    @DatabaseField(columnName = Column.PUSHES, dataType = DataType.SERIALIZABLE)
+    private HashMap<Long, Push> pushes;
 
     @DatabaseField(columnName = Column.NAME)
     private String name;
@@ -35,52 +32,16 @@ public class Project extends AbsSynchronizable implements Serializable {
     @DatabaseField(columnName = Column.DESCRIPTION)
     private String description;
 
-    public Project(User owner, HashMap<Long, User> developers, HashMap<Long, Commit> commits, String name, String description) {
-        this.owner = owner;
-        this.developers = developers;
-        this.commits = commits;
-        this.name = name;
+    public Project(){
+    }
+
+    public Project(Long id, String description, HashMap<Long, User> developers, String name, User owner, HashMap<Long, Push> pushes) {
+        super(id);
         this.description = description;
-    }
-
-    public Project(User owner, String name, String description) {
-        this(owner, new HashMap<Long, User>(), new HashMap<Long, Commit>(), name, description);
-    }
-
-    public Project(String name, String description) {
-        this(null, name, description);
-    }
-
-    public Project(String name) {
-        this(name, "");
-    }
-
-    public Project() {
-        this("");
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
-    }
-
-    public HashMap<Long, User> getDevelopers() {
-        return developers;
-    }
-
-    public HashMap<Long, Commit> getCommits() {
-        return commits;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+        this.developers = developers;
         this.name = name;
+        this.owner = owner;
+        this.pushes = pushes;
     }
 
     public String getDescription() {
@@ -91,32 +52,55 @@ public class Project extends AbsSynchronizable implements Serializable {
         this.description = description;
     }
 
-    public void addDeveloper(User user) {
-        developers.put(user.getId(), user);
+    public HashMap<Long, User> getDevelopers() {
+        return developers;
     }
 
-    public void addDeveloper(User... user) {
-        for (User aUser : user) {
-            developers.put(aUser.getId(), aUser);
-        }
+    public void setDevelopers(HashMap<Long, User> developers) {
+        this.developers = developers;
     }
 
-    public void addCommit(Commit commit) {
-        commits.put(commit.getId(), commit);
+    public String getName() {
+        return name;
     }
 
-    public void addCommit(Commit... commit) {
-        for (Commit aCommit : commit) {
-            commits.put(aCommit.getId(), aCommit);
-        }
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public double getScore() {
-        double score = 0;
-//        for (Commit commit : commits) {
-//            score += commit.getScore();
-//        }
-        return score;
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+    public HashMap<Long, Push> getPushes() {
+        return pushes;
+    }
+
+    public void setPushes(HashMap<Long, Push> pushes) {
+        this.pushes = pushes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Project)) return false;
+        if (!super.equals(o)) return false;
+
+        Project project = (Project) o;
+
+        return !(getId() != null ? !(getId().longValue() == project.getId().longValue()) : project.getId() != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (getOwner() != null ? getOwner().hashCode() : 0);
+        return result;
     }
 
     @Override

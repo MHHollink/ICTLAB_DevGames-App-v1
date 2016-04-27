@@ -2,6 +2,12 @@ package baecon.devgames.database.task;
 
 import android.content.Context;
 
+import com.j256.ormlite.dao.Dao;
+
+import java.io.Serializable;
+import java.sql.SQLException;
+import java.util.Objects;
+
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.connection.synchronization.UserManager;
 import baecon.devgames.database.DBHelper;
@@ -11,12 +17,6 @@ import baecon.devgames.events.user.UserPushScheduledEvent;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
 import baecon.devgames.util.L;
-
-import com.j256.ormlite.dao.Dao;
-
-import java.io.Serializable;
-import java.sql.SQLException;
-import java.util.Objects;
 
 /**
  * Applies an Operation to a User in an asynchronous task.

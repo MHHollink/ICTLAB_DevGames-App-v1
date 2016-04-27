@@ -6,9 +6,9 @@ import com.j256.ormlite.dao.Dao;
 
 import java.sql.SQLException;
 
+import baecon.devgames.connection.client.dto.UserDTO;
 import baecon.devgames.connection.task.RESTTask;
 import baecon.devgames.database.DBHelper;
-import baecon.devgames.connection.client.dto.UserDTO;
 import baecon.devgames.model.ISynchronizable;
 import baecon.devgames.model.User;
 import baecon.devgames.util.L;
@@ -34,7 +34,7 @@ public class PollUserTask extends RESTTask<Void, Void, Integer> {
 
         UserDTO dto;
         try {
-            dto = createService().getUser(userId);
+            dto = createService().getUserById(userId);
         } catch (RetrofitError error) {
             int status = super.getStatus(error);
 

@@ -4,13 +4,14 @@ import android.content.Context;
 
 import com.j256.ormlite.table.DatabaseTable;
 
-import java.io.Serializable;
 import java.sql.SQLException;
 
+import baecon.devgames.DevGamesApplication;
 import baecon.devgames.connection.client.DevGamesClient;
 import baecon.devgames.connection.client.dto.UserDTO;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.model.User;
+import baecon.devgames.ui.activity.DevGamesActivity;
 import baecon.devgames.util.L;
 import retrofit.client.Response;
 
@@ -52,7 +53,7 @@ public class UserUpdate extends AbsModelUpdate<User> {
 
                 L.d("Update for {0}", dto.toString());
 
-                response = client.changeOwnUser(dto);
+                response = client.updateUser(dto, DevGamesApplication.get(context).getLoggedInUser().getId());
 
                 L.d("Update response status : {0}, reason : {1}", response.getStatus(), response.getReason());
 

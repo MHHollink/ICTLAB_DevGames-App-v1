@@ -1,5 +1,5 @@
 #
-# generated on 2016/03/14 07:06:52
+# generated on 2016/04/27 09:20:24
 #
 # --table-start--
 dataClass=baecon.devgames.model.User
@@ -14,18 +14,38 @@ fieldName=gitUsername
 columnName=git_username
 # --field-end--
 # --field-start--
+fieldName=gcmKey
+columnName=gcm_registration_key
+# --field-end--
+# --field-start--
+fieldName=firstName
+columnName=fname
+# --field-end--
+# --field-start--
+fieldName=tween
+columnName=tween
+# --field-end--
+# --field-start--
+fieldName=lastName
+columnName=lname
+# --field-end--
+# --field-start--
+fieldName=age
+columnName=age
+# --field-end--
+# --field-start--
+fieldName=mainJob
+columnName=job
+# --field-end--
+# --field-start--
 fieldName=projects
 columnName=projects
 dataPersister=SERIALIZABLE
 # --field-end--
 # --field-start--
-fieldName=commits
-columnName=commits
+fieldName=pushes
+columnName=pushes
 dataPersister=SERIALIZABLE
-# --field-end--
-# --field-start--
-fieldName=gcmKey
-columnName=gcm_registration_key
 # --field-end--
 # --field-start--
 fieldName=id
@@ -106,8 +126,8 @@ columnName=developers
 dataPersister=SERIALIZABLE
 # --field-end--
 # --field-start--
-fieldName=commits
-columnName=commits
+fieldName=pushes
+columnName=pushes
 dataPersister=SERIALIZABLE
 # --field-end--
 # --field-start--
@@ -118,6 +138,22 @@ columnName=name
 fieldName=description
 columnName=description
 # --field-end--
+# --field-start--
+fieldName=id
+columnName=id
+id=true
+# --field-end--
+# --field-start--
+fieldName=state
+columnName=state
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=baecon.devgames.model.Push
+tableName=pushes
+# --table-fields-start--
 # --field-start--
 fieldName=id
 columnName=id
@@ -167,6 +203,70 @@ columnName=timestamp
 # --field-start--
 fieldName=score
 columnName=score
+# --field-end--
+# --field-start--
+fieldName=id
+columnName=id
+id=true
+# --field-end--
+# --field-start--
+fieldName=state
+columnName=state
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=baecon.devgames.model.Issue
+tableName=issue
+# --table-fields-start--
+# --field-start--
+fieldName=issueId
+columnName=identifier
+# --field-end--
+# --field-start--
+fieldName=severity
+columnName=git_username
+# --field-end--
+# --field-start--
+fieldName=component
+columnName=projects
+# --field-end--
+# --field-start--
+fieldName=startLine
+columnName=pushes
+# --field-end--
+# --field-start--
+fieldName=endLine
+columnName=gcm_registration_key
+# --field-end--
+# --field-start--
+fieldName=status
+columnName=fname
+# --field-end--
+# --field-start--
+fieldName=resolution
+columnName=lname
+# --field-end--
+# --field-start--
+fieldName=message
+columnName=tween
+# --field-end--
+# --field-start--
+fieldName=debt
+columnName=age
+# --field-end--
+# --field-start--
+fieldName=creationDate
+columnName=creation_date
+# --field-end--
+# --field-start--
+fieldName=updateDate
+columnName=update_date
+# --field-end--
+# --field-start--
+fieldName=closeDate
+columnName=close_date
 # --field-end--
 # --field-start--
 fieldName=id

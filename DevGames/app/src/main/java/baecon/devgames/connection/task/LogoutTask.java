@@ -2,6 +2,12 @@ package baecon.devgames.connection.task;
 
 import android.content.Context;
 
+import com.google.android.gms.gcm.GoogleCloudMessaging;
+import com.j256.ormlite.dao.Dao;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.events.BusProvider;
@@ -11,11 +17,6 @@ import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
 import baecon.devgames.util.L;
 import baecon.devgames.util.Utils;
-import com.google.android.gms.gcm.GoogleCloudMessaging;
-import com.j256.ormlite.dao.Dao;
-
-import java.io.IOException;
-import java.sql.SQLException;
 
 /**
  * An AsyncTask that logs out the user.

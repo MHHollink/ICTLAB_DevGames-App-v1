@@ -24,6 +24,7 @@ import baecon.devgames.model.update.AbsModelUpdate;
 import baecon.devgames.util.L;
 import baecon.devgames.util.Utils;
 import retrofit.RetrofitError;
+
 import static baecon.devgames.model.ISynchronizable.State.HAS_BLOCKING_CHANGES;
 import static baecon.devgames.model.ISynchronizable.State.HAS_UN_SYNCED_CHANGES;
 
