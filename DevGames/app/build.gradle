@@ -18,17 +18,18 @@ android {
         versionCode 9
         versionName "0.1.1"
         buildConfigField "String", "GCM_SENDER_ID", "\"69868578367\""
-        buildConfigField "String", "ENDPOINT_URL", "\"http://192.168.0.113:8080\""
     }
     buildTypes {
         debug {
             applicationIdSuffix '.core'
             buildConfigField "boolean", "IS_PRODUCTION", "false"
             versionNameSuffix '-SNAPSHOT'
+            buildConfigField "String", "ENDPOINT_URL", "\"http://192.168.0.113:8080\""
         }
         release {
             minifyEnabled false
             buildConfigField "boolean", "IS_PRODUCTION", "true"
+            buildConfigField "String", "ENDPOINT_URL", "\"http://145.24.222.173:8080\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
