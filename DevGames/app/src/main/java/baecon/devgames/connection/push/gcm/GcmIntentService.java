@@ -84,6 +84,29 @@ public class GcmIntentService extends IntentService{
                     DevGamesApplication.get(this).setLoggedInUser(null);
 
                     break;
+
+                case NEW_SCORES:
+
+                    notificationText = "Je laatste push had een score van: " + intent.getStringExtra("text");
+                    if ((notificationText == null || notificationText.isEmpty())) {
+                        notificationText = getString(R.string.new_score);
+                    }
+
+                    showNotification(
+                            this,
+                            GcmMessageType.NEW_SCORES.ordinal(),
+                            getString(R.string.app_name),
+                            notificationText,
+                            notificationText,
+                            true
+                    );
+
+                    new LogoutTask(this, false).executeThreaded();
+                    PreferenceManager.applyDefaultPreferences(this);
+                    DevGamesApplication.get(this).setLoggedInUser(null);
+
+                    break;
+
                 default:
                     L.w("Type is not a known type in Message.Type: " + String.valueOf(type));
             }
