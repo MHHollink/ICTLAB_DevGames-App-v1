@@ -56,6 +56,8 @@
     <string name="new_message">You received a new notification</string>
     <string name="cancel">Cancel</string>
     <string name="new_device_registerd">Your account has been loggedin on another device!</string>
+    <string name="new_score">Your last push had a score of: %s!</string>
+    <string name="new_score_default">You have a new score for your push!</string>
 
 
 </resources>
