@@ -87,9 +87,9 @@ public class GcmIntentService extends IntentService{
 
                 case NEW_SCORES:
 
-                    notificationText = "Je laatste push had een score van: " + intent.getStringExtra("text");
+                    notificationText = getString(R.string.new_score, intent.getStringExtra("text"));
                     if ((notificationText == null || notificationText.isEmpty())) {
-                        notificationText = getString(R.string.new_score);
+                        notificationText = getString(R.string.new_score_default);
                     }
 
                     showNotification(

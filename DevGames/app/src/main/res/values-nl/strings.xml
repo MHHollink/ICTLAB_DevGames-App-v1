@@ -55,6 +55,7 @@
 
     <string name="new_message">U heeft een nieuwe melding ontvangen</string>
     <string name="new_device_registerd">U bent ingelogd op een ander apparaat!</string>
-    <string name="new_score">Je laatste push heeft een nieuwe score!</string>
+    <string name="new_score">Je laatste push had een score van: %s!</string>
+    <string name="new_score_default">Je hebt een nieuwe score voor een push!</string>
 
 </resources>
