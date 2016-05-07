@@ -18,9 +18,17 @@ import java.util.Map;
 
 import baecon.devgames.R;
 import baecon.devgames.model.Commit;
+import baecon.devgames.model.Duplication;
+import baecon.devgames.model.Issue;
 import baecon.devgames.model.Project;
+import baecon.devgames.model.Push;
 import baecon.devgames.model.Setting;
 import baecon.devgames.model.User;
+import baecon.devgames.model.update.CommitUpdate;
+import baecon.devgames.model.update.DuplicationUpdate;
+import baecon.devgames.model.update.IssueUpdate;
+import baecon.devgames.model.update.ProjectUpdate;
+import baecon.devgames.model.update.PushUpdate;
 import baecon.devgames.model.update.UserUpdate;
 import baecon.devgames.util.Utils;
 
@@ -157,13 +165,51 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         return dbHelper.getDao(UserUpdate.class, Long.class);
     }
 
+
     public static Dao<Project, Long> getProjectDao(DBHelper dbHelper) {
         return dbHelper.getDao(Project.class, Long.class);
     }
 
-    public static Dao<Commit, Long> getCommit(DBHelper dbHelper) {
+    public static Dao<ProjectUpdate, Long> getProjectUpdateDao(DBHelper dbHelper) {
+        return dbHelper.getDao(ProjectUpdate.class, Long.class);
+    }
+
+
+    public static Dao<Commit, Long> getCommitDao(DBHelper dbHelper) {
         return dbHelper.getDao(Commit.class, Long.class);
     }
+
+    public static Dao<CommitUpdate, Long> getCommitUpdateDao(DBHelper dbHelper) {
+        return dbHelper.getDao(CommitUpdate.class, Long.class);
+    }
+
+
+    public static Dao<Push, Long> getPushDao(DBHelper dbHelper) {
+        return dbHelper.getDao(Push.class, Long.class);
+    }
+
+    public static Dao<PushUpdate, Long> getPushUpdateDao(DBHelper dbHelper) {
+        return dbHelper.getDao(PushUpdate.class, Long.class);
+    }
+
+
+    public static Dao<Issue, Long> getIssueDao(DBHelper dbHelper) {
+        return dbHelper.getDao(Issue.class, Long.class);
+    }
+
+    public static Dao<IssueUpdate, Long> getIssueUpdateDao(DBHelper dbHelper) {
+        return dbHelper.getDao(IssueUpdate.class, Long.class);
+    }
+
+
+    public static Dao<Duplication, Long> getDuplicationDao(DBHelper dbHelper) {
+        return dbHelper.getDao(Duplication.class, Long.class);
+    }
+
+    public static Dao<DuplicationUpdate, Long> getDuplicationUpdateDao(DBHelper dbHelper) {
+        return dbHelper.getDao(DuplicationUpdate.class, Long.class);
+    }
+
 
     public static Dao<Setting, String> getSettingDao(DBHelper dbHelper) {
         return dbHelper.getDao(Setting.class, String.class);

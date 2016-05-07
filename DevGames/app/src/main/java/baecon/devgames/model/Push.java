@@ -1,5 +1,7 @@
 package baecon.devgames.model;
 
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
@@ -17,12 +19,22 @@ public class Push extends AbsSynchronizable implements Serializable {
         public static final String SCORE = "score";
     }
 
+    @DatabaseField(columnName = Column.PROJECT, dataType = DataType.SERIALIZABLE)
     private Project project;
+
+    @DatabaseField(columnName = Column.COMMITS, dataType = DataType.SERIALIZABLE)
     private Set<Commit> commits;
+
+    @DatabaseField(columnName = Column.ISSUES, dataType = DataType.SERIALIZABLE)
     private Set<Issue> issues;
+
+    @DatabaseField(columnName = Column.DUPLICATION, dataType = DataType.SERIALIZABLE)
     private Set<Duplication> duplications;
 
+    @DatabaseField(columnName = Column.TIMESTAMP)
     private long timestamp;
+
+    @DatabaseField(columnName = Column.SCORE)
     private double score;
 
     public Push() {
