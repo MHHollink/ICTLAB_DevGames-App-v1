@@ -6,9 +6,7 @@ import java.io.Serializable;
 import java.sql.SQLException;
 
 import baecon.devgames.connection.client.DevGamesClient;
-import baecon.devgames.connection.client.dto.PushDTO;
 import baecon.devgames.database.DBHelper;
-import baecon.devgames.database.modelupdate.ModelUpdate;
 import baecon.devgames.model.Push;
 import retrofit.client.Response;
 

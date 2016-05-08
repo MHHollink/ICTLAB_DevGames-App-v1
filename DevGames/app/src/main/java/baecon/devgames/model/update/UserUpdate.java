@@ -11,7 +11,6 @@ import baecon.devgames.connection.client.DevGamesClient;
 import baecon.devgames.connection.client.dto.UserDTO;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.model.User;
-import baecon.devgames.ui.activity.DevGamesActivity;
 import baecon.devgames.util.L;
 import retrofit.client.Response;
 

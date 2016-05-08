@@ -66,13 +66,13 @@ public class GcmIntentService extends IntentService{
                     break;
 
 
-                case NEW_DEVICE_REGISTERED:
+                case REGISTERED_ELSEWHERE:
 
-                    notificationText = getString(R.string.new_device_registerd);
+                    notificationText = getString(R.string.new_device_registered);
 
                     showNotification(
                             this,
-                            GcmMessageType.NEW_DEVICE_REGISTERED.ordinal(),
+                            GcmMessageType.REGISTERED_ELSEWHERE.ordinal(),
                             getString(R.string.app_name),
                             notificationText,
                             notificationText,
@@ -85,7 +85,7 @@ public class GcmIntentService extends IntentService{
 
                     break;
 
-                case NEW_SCORES:
+                case NEW_PUSH_RECEIVED:
 
                     notificationText = getString(R.string.new_score, intent.getStringExtra("text"));
                     if ((notificationText == null || notificationText.isEmpty())) {
@@ -94,7 +94,7 @@ public class GcmIntentService extends IntentService{
 
                     showNotification(
                             this,
-                            GcmMessageType.NEW_SCORES.ordinal(),
+                            GcmMessageType.NEW_PUSH_RECEIVED.ordinal(),
                             getString(R.string.app_name),
                             notificationText,
                             notificationText,
@@ -155,7 +155,7 @@ public class GcmIntentService extends IntentService{
 
         // Build the intent that will be fired when the user clicks the notification
         Intent notificationIntent =
-                id != GcmMessageType.NEW_DEVICE_REGISTERED.ordinal() ?
+                id != GcmMessageType.REGISTERED_ELSEWHERE.ordinal() ?
                         new Intent(context, MainActivity.class) :
                         new Intent(context, LoginActivity.class);
 

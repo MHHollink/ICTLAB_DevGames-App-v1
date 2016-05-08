@@ -1,5 +1,5 @@
 #
-# generated on 2016/04/27 09:20:24
+# generated on 2016/05/07 03:22:08
 #
 # --table-start--
 dataClass=baecon.devgames.model.User
@@ -151,9 +151,87 @@ columnName=state
 # --table-end--
 #################################
 # --table-start--
+dataClass=baecon.devgames.model.update.ProjectUpdate
+tableName=projectupdate
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=timestamp
+columnName=timestamp
+# --field-end--
+# --field-start--
+fieldName=uuid
+columnName=local_id
+# --field-end--
+# --field-start--
+fieldName=model
+columnName=model
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=field
+columnName=field
+# --field-end--
+# --field-start--
+fieldName=value
+columnName=value
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=numberOfRetries
+columnName=number_of_retries
+# --field-end--
+# --field-start--
+fieldName=blockingErrorHttpStatusCode
+columnName=blocking_error_http_status_code
+# --field-end--
+# --field-start--
+fieldName=blockingErrorReason
+columnName=blocking_error_reason
+# --field-end--
+# --field-start--
+fieldName=operation
+columnName=operation
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
 dataClass=baecon.devgames.model.Push
 tableName=pushes
 # --table-fields-start--
+# --field-start--
+fieldName=project
+columnName=project
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=commits
+columnName=commits
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=issues
+columnName=issues
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=duplications
+columnName=duplications
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=timestamp
+columnName=timestamp
+# --field-end--
+# --field-start--
+fieldName=score
+columnName=score
+# --field-end--
 # --field-start--
 fieldName=id
 columnName=id
@@ -162,6 +240,56 @@ id=true
 # --field-start--
 fieldName=state
 columnName=state
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=baecon.devgames.model.update.PushUpdate
+tableName=pushupdate
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=timestamp
+columnName=timestamp
+# --field-end--
+# --field-start--
+fieldName=uuid
+columnName=local_id
+# --field-end--
+# --field-start--
+fieldName=model
+columnName=model
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=field
+columnName=field
+# --field-end--
+# --field-start--
+fieldName=value
+columnName=value
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=numberOfRetries
+columnName=number_of_retries
+# --field-end--
+# --field-start--
+fieldName=blockingErrorHttpStatusCode
+columnName=blocking_error_http_status_code
+# --field-end--
+# --field-start--
+fieldName=blockingErrorReason
+columnName=blocking_error_reason
+# --field-end--
+# --field-start--
+fieldName=operation
+columnName=operation
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -212,6 +340,56 @@ id=true
 # --field-start--
 fieldName=state
 columnName=state
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=baecon.devgames.model.update.CommitUpdate
+tableName=commitupdate
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=timestamp
+columnName=timestamp
+# --field-end--
+# --field-start--
+fieldName=uuid
+columnName=local_id
+# --field-end--
+# --field-start--
+fieldName=model
+columnName=model
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=field
+columnName=field
+# --field-end--
+# --field-start--
+fieldName=value
+columnName=value
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=numberOfRetries
+columnName=number_of_retries
+# --field-end--
+# --field-start--
+fieldName=blockingErrorHttpStatusCode
+columnName=blocking_error_http_status_code
+# --field-end--
+# --field-start--
+fieldName=blockingErrorReason
+columnName=blocking_error_reason
+# --field-end--
+# --field-start--
+fieldName=operation
+columnName=operation
 # --field-end--
 # --table-fields-end--
 # --table-end--
@@ -276,6 +454,122 @@ id=true
 # --field-start--
 fieldName=state
 columnName=state
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=baecon.devgames.model.update.IssueUpdate
+tableName=issueupdate
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=timestamp
+columnName=timestamp
+# --field-end--
+# --field-start--
+fieldName=uuid
+columnName=local_id
+# --field-end--
+# --field-start--
+fieldName=model
+columnName=model
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=field
+columnName=field
+# --field-end--
+# --field-start--
+fieldName=value
+columnName=value
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=numberOfRetries
+columnName=number_of_retries
+# --field-end--
+# --field-start--
+fieldName=blockingErrorHttpStatusCode
+columnName=blocking_error_http_status_code
+# --field-end--
+# --field-start--
+fieldName=blockingErrorReason
+columnName=blocking_error_reason
+# --field-end--
+# --field-start--
+fieldName=operation
+columnName=operation
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=baecon.devgames.model.Duplication
+tableName=duplication
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+id=true
+# --field-end--
+# --field-start--
+fieldName=state
+columnName=state
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
+dataClass=baecon.devgames.model.update.DuplicationUpdate
+tableName=duplicationupdate
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=timestamp
+columnName=timestamp
+# --field-end--
+# --field-start--
+fieldName=uuid
+columnName=local_id
+# --field-end--
+# --field-start--
+fieldName=model
+columnName=model
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=field
+columnName=field
+# --field-end--
+# --field-start--
+fieldName=value
+columnName=value
+dataPersister=SERIALIZABLE
+# --field-end--
+# --field-start--
+fieldName=numberOfRetries
+columnName=number_of_retries
+# --field-end--
+# --field-start--
+fieldName=blockingErrorHttpStatusCode
+columnName=blocking_error_http_status_code
+# --field-end--
+# --field-start--
+fieldName=blockingErrorReason
+columnName=blocking_error_reason
+# --field-end--
+# --field-start--
+fieldName=operation
+columnName=operation
 # --field-end--
 # --table-fields-end--
 # --table-end--

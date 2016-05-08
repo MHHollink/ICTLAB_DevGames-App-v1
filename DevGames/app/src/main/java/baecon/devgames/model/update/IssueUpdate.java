@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 import baecon.devgames.connection.client.DevGamesClient;
 import baecon.devgames.database.DBHelper;
-import baecon.devgames.database.modelupdate.ModelUpdate;
 import baecon.devgames.model.Issue;
 import retrofit.client.Response;
 

@@ -14,6 +14,11 @@ import baecon.devgames.model.Project;
 import baecon.devgames.model.Push;
 import baecon.devgames.model.Setting;
 import baecon.devgames.model.User;
+import baecon.devgames.model.update.CommitUpdate;
+import baecon.devgames.model.update.DuplicationUpdate;
+import baecon.devgames.model.update.IssueUpdate;
+import baecon.devgames.model.update.ProjectUpdate;
+import baecon.devgames.model.update.PushUpdate;
 import baecon.devgames.model.update.UserUpdate;
 
 /**
@@ -61,14 +66,19 @@ public class DatabaseConfigUtil extends OrmLiteConfigUtil {
             UserUpdate.class,
 
             Project.class,
+            ProjectUpdate.class,
 
             Push.class,
+            PushUpdate.class,
 
             Commit.class,
+            CommitUpdate.class,
 
             Issue.class,
+            IssueUpdate.class,
 
-//            Duplication.class,
+            Duplication.class,
+            DuplicationUpdate.class,
 
             Setting.class
     };
