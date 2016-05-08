@@ -25,7 +25,7 @@ android {
             applicationIdSuffix '.core'
             buildConfigField "boolean", "IS_PRODUCTION", "false"
             versionNameSuffix '-SNAPSHOT'
-            buildConfigField "String", "ENDPOINT_URL", "\"http://192.168.0.113:8080\""
+            buildConfigField "String", "ENDPOINT_URL", "\"http://192.168.0.126:8080\""
         }
         release {
             minifyEnabled false
