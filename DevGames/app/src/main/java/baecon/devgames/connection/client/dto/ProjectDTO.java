@@ -32,6 +32,50 @@ public class ProjectDTO implements ModelDTO<Project> {
         return project;
     }
 
+    public Set<Commit> getCommits() {
+        return commits;
+    }
+
+    public void setCommits(Set<Commit> commits) {
+        this.commits = commits;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<User> getDevelopers() {
+        return developers;
+    }
+
+    public void setDevelopers(Set<User> developers) {
+        this.developers = developers;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
     @Override
     public String toString() {
         return "ProjectDTO{" +

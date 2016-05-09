@@ -96,6 +96,7 @@ public class GcmRegistrationTask extends RESTTask<Void, Void, String> {
             return ERROR_GCM_REGISTER_ERROR;
         }
 
+
         // TODO : fix this dirty hack to get the GCM token to save in the backend
         UserDTO updatedUser = new UserDTO(loggedInUser);
         updatedUser.setGcmId(newGCMKey);

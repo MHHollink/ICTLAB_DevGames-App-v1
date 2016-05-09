@@ -5,7 +5,7 @@ import baecon.devgames.model.Duplication;
 /**
  * Created by Marcel on 09-5-2016.
  */
-public class DuplicationDTO implements ModelDTO<Duplication> {
+public class DuplicationDTO implements ModelDTO<Duplication> { // TODO: 09-5-2016  
     @Override
     public Long getId() {
         return null;

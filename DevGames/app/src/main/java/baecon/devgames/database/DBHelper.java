@@ -94,7 +94,6 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
         HashSet<String> oldTables = new HashSet<>();
 
-        // TODO: 09-5-2016
         oldTables.addAll(
                 Arrays.asList(
                         Tables.USERS, Tables.USER_UPDATES,
