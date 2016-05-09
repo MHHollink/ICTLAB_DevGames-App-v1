@@ -9,8 +9,6 @@ import baecon.devgames.connection.client.dto.IssueDTO;
 import baecon.devgames.connection.client.dto.ProjectDTO;
 import baecon.devgames.connection.client.dto.PushDTO;
 import baecon.devgames.connection.client.dto.UserDTO;
-import baecon.devgames.model.Commit;
-import baecon.devgames.model.Duplication;
 import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.Field;

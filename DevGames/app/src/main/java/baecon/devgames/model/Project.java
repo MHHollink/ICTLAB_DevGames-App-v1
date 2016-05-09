@@ -118,6 +118,6 @@ public class Project extends AbsSynchronizable implements Serializable {
     @Override
     public boolean contentEquals(Object other) {
         return false;
-    }
+    } // TODO: 09-5-2016
 
 }

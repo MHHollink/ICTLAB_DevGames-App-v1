@@ -46,7 +46,6 @@ public class UserDTO implements ModelDTO<User> {
         user.setFirstName(firstName);
         user.setLastName(lastName);
 
-
         return user;
     }
 

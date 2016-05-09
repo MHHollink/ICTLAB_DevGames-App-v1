@@ -1,14 +1,11 @@
 package baecon.devgames.model;
 
-import android.widget.LinearLayout;
-
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Set;
 
 import baecon.devgames.database.DBHelper;
 

@@ -29,40 +29,40 @@ public class Issue extends AbsSynchronizable implements Serializable{
     }
 
     @DatabaseField(columnName = Column.ISSUE_ID)
-    long issueId;
+    private long issueId;
 
     @DatabaseField(columnName = Column.SEVERITY)
-    String severity;
+    private String severity;
 
     @DatabaseField(columnName = Column.COMPONENT)
-    String component;
+    private String component;
 
     @DatabaseField(columnName = Column.START_LINE)
-    int startLine;
+    private int startLine;
 
     @DatabaseField(columnName = Column.END_LINE)
-    int endLine;
+    private int endLine;
 
     @DatabaseField(columnName = Column.STATUS)
-    String status;
+    private String status;
 
     @DatabaseField(columnName = Column.RESOLUTION)
-    String resolution;
+    private String resolution;
 
     @DatabaseField(columnName = Column.MESSAGE)
-    String message;
+    private String message;
 
     @DatabaseField(columnName = Column.DEBT)
-    int debt;
+    private int debt;
 
     @DatabaseField(columnName = Column.CREATION_DATE)
-    long creationDate;
+    private long creationDate;
 
     @DatabaseField(columnName = Column.UPDATE_DATE)
-    long updateDate;
+    private long updateDate;
 
     @DatabaseField(columnName = Column.CLOSE_DATE)
-    long closeDate;
+    private long closeDate;
 
     public Issue(Long id, long closeDate, String component, long creationDate, int debt, int endLine, long issueId, String message, String resolution, String severity, int startLine, String status, long updateDate) {
         super(id);
@@ -200,5 +200,5 @@ public class Issue extends AbsSynchronizable implements Serializable{
     @Override
     public boolean contentEquals(Object other) {
         return false;
-    }
+    } // TODO: 09-5-2016
 }
