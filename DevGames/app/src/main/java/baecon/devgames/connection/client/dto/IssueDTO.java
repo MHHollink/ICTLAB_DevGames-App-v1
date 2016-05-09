@@ -1,18 +1,18 @@
 package baecon.devgames.connection.client.dto;
 
-import baecon.devgames.model.Push;
+import baecon.devgames.model.Issue;
 
 /**
- * Created by Marcel on 27-4-2016.
+ * Created by Marcel on 09-5-2016.
  */
-public class PushDTO implements ModelDTO<Push> {
+public class IssueDTO implements ModelDTO<Issue> {
     @Override
     public Long getId() {
         return null;
     }
 
     @Override
-    public Push toModel() {
+    public Issue toModel() {
         return null;
     }
 

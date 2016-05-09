@@ -31,4 +31,16 @@ public class ProjectDTO implements ModelDTO<Project> {
 
         return project;
     }
+
+    @Override
+    public String toString() {
+        return "ProjectDTO{" +
+                "commits=" + commits +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", owner=" + owner +
+                ", developers=" + developers +
+                '}';
+    }
 }

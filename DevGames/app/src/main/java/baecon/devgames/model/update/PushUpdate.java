@@ -7,9 +7,12 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 import java.sql.SQLException;
 
+import baecon.devgames.DevGamesApplication;
 import baecon.devgames.connection.client.DevGamesClient;
+import baecon.devgames.connection.client.dto.UserDTO;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.model.Push;
+import baecon.devgames.util.L;
 import retrofit.client.Response;
 
 /**
@@ -61,6 +64,6 @@ public class PushUpdate extends AbsModelUpdate<Push> {
 
     @Override
     public Response sync(Context context, DBHelper dbHelper, DevGamesClient client) throws Exception {
-        return null; // todu
+        return null; // todo
     }
 }

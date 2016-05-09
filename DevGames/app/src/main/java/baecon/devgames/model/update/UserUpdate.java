@@ -49,11 +49,8 @@ public class UserUpdate extends AbsModelUpdate<User> {
             case UPDATE:
 
                 UserDTO dto = new UserDTO(getModel());
-
-                L.d("Update for {0}", dto.toString());
-
+                L.v("Update for {0}", dto.toString());
                 response = client.updateUser(dto, DevGamesApplication.get(context).getLoggedInUser().getId());
-
                 L.d("Update response status : {0}, reason : {1}", response.getStatus(), response.getReason());
 
                 break;

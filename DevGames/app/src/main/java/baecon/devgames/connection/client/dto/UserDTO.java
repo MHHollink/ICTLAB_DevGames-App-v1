@@ -146,4 +146,22 @@ public class UserDTO implements ModelDTO<User> {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    @Override
+    public String toString() {
+        return "UserDTO{" +
+                "age=" + age +
+                ", id=" + id +
+                ", username='" + username + '\'' +
+                ", gitUsername='" + gitUsername + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", tween='" + tween + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", mainJob='" + mainJob + '\'' +
+                ", projects=" + projects +
+                ", pushes=" + pushes +
+                ", session='" + session + '\'' +
+                ", gcmId='" + gcmId + '\'' +
+                '}';
+    }
 }
