@@ -15,8 +15,8 @@ android {
         applicationId "baecon.devgames"
         minSdkVersion 19
         targetSdkVersion 23
-        versionCode 9
-        versionName "0.1.1"
+        versionCode 11
+        versionName "0.1.3"
         buildConfigField "String", "GCM_SENDER_ID", "\"69868578367\""
         buildConfigField "String", "ENDPOINT_URL", "\"http://145.24.222.173:8080\""
     }

@@ -34,11 +34,22 @@ import baecon.devgames.util.Utils;
 
 public class DBHelper extends OrmLiteSqliteOpenHelper {
 
+    public class Tables {
+        public static final String
+                USERS = "users", USER_UPDATES = "userupdates",
+                PROJECTS = "projects", PROJECT_UPDATE = "projectupdates",
+                PUSHES = "pushes", PUSH_UPDATE = "pushupdates",
+                COMMITS = "commits", COMMIT_UPDATE = "commitupdate",
+                ISSUES = "issues", ISSUE_UPDATE = "issueupdate",
+                DUPLICATIONS = "duplications", DUPLICATION_UPDATE = "duplicationupdate",
+                SETTINGS = "settings";
+    }
+
     public static final String TAG = DBHelper.class.getName();
 
     private static final String DATABASE_NAME = "devgames.db";
 
-    private static final int DATABASE_VERSION = 12;
+    private static final int DATABASE_VERSION = 14;
 
     private static int APP_VERSION_CODE;
 
@@ -82,14 +93,21 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         Log.i(TAG, "onUpgrade: #");
 
         HashSet<String> oldTables = new HashSet<>();
+
+        // TODO: 09-5-2016
         oldTables.addAll(
                 Arrays.asList(
-                        "users",
-                        "commits",
-                        "projects"
+                        Tables.USERS, Tables.USER_UPDATES,
+                        Tables.PROJECT_UPDATE, Tables.PROJECTS,
+                        Tables.PUSH_UPDATE, Tables.PUSHES,
+                        Tables.COMMIT_UPDATE, Tables.COMMITS,
+                        Tables.ISSUE_UPDATE, Tables.ISSUES,
+                        Tables.DUPLICATION_UPDATE, Tables.DUPLICATIONS,
+                        Tables.SETTINGS
                 )
         );
 
+        
         for (String tableName : oldTables) {
             try {
                 Log.i(TAG, "onUpgrade: Deleting table "+ tableName);

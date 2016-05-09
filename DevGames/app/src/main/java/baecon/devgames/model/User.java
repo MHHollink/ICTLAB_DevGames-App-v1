@@ -8,9 +8,10 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import baecon.devgames.database.DBHelper;
 import baecon.devgames.util.Utils;
 
-@DatabaseTable(tableName = "users")
+@DatabaseTable(tableName = DBHelper.Tables.USERS)
 public class User extends AbsSynchronizable implements Serializable {
 
     public static class Column{

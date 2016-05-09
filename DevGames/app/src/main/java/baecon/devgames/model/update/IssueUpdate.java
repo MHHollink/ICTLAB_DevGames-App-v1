@@ -2,6 +2,8 @@ package baecon.devgames.model.update;
 
 import android.content.Context;
 
+import com.j256.ormlite.table.DatabaseTable;
+
 import java.io.Serializable;
 import java.sql.SQLException;
 
@@ -13,6 +15,7 @@ import retrofit.client.Response;
 /**
  * Created by Marcel on 07-5-2016.
  */
+@DatabaseTable(tableName = DBHelper.Tables.ISSUE_UPDATE)
 public class IssueUpdate extends AbsModelUpdate<Issue> {
 
     public IssueUpdate() {

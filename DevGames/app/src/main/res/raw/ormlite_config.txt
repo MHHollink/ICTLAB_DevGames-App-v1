@@ -1,5 +1,5 @@
 #
-# generated on 2016/05/07 03:22:08
+# generated on 2016/05/09 11:43:33
 #
 # --table-start--
 dataClass=baecon.devgames.model.User
@@ -61,7 +61,7 @@ columnName=state
 #################################
 # --table-start--
 dataClass=baecon.devgames.model.update.UserUpdate
-tableName=userupdate
+tableName=userupdates
 # --table-fields-start--
 # --field-start--
 fieldName=id
@@ -152,7 +152,7 @@ columnName=state
 #################################
 # --table-start--
 dataClass=baecon.devgames.model.update.ProjectUpdate
-tableName=projectupdate
+tableName=projectupdates
 # --table-fields-start--
 # --field-start--
 fieldName=id
@@ -246,7 +246,7 @@ columnName=state
 #################################
 # --table-start--
 dataClass=baecon.devgames.model.update.PushUpdate
-tableName=pushupdate
+tableName=pushupdates
 # --table-fields-start--
 # --field-start--
 fieldName=id
@@ -396,7 +396,7 @@ columnName=operation
 #################################
 # --table-start--
 dataClass=baecon.devgames.model.Issue
-tableName=issue
+tableName=issues
 # --table-fields-start--
 # --field-start--
 fieldName=issueId
@@ -510,7 +510,7 @@ columnName=operation
 #################################
 # --table-start--
 dataClass=baecon.devgames.model.Duplication
-tableName=duplication
+tableName=duplications
 # --table-fields-start--
 # --field-start--
 fieldName=id

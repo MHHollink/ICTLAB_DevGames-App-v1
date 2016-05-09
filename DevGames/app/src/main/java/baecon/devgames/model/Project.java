@@ -7,7 +7,9 @@ import com.j256.ormlite.table.DatabaseTable;
 import java.io.Serializable;
 import java.util.HashMap;
 
-@DatabaseTable(tableName = "projects")
+import baecon.devgames.database.DBHelper;
+
+@DatabaseTable(tableName = DBHelper.Tables.PROJECTS)
 public class Project extends AbsSynchronizable implements Serializable {
 
     public static class Column {

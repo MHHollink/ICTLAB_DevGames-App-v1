@@ -14,7 +14,7 @@ import baecon.devgames.model.User;
 import baecon.devgames.util.L;
 import retrofit.client.Response;
 
-@DatabaseTable
+@DatabaseTable(tableName = DBHelper.Tables.USER_UPDATES)
 public class UserUpdate extends AbsModelUpdate<User> {
 
     public UserUpdate() {

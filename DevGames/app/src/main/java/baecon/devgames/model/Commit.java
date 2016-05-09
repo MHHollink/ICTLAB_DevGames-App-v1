@@ -6,7 +6,9 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
-@DatabaseTable(tableName = "commits")
+import baecon.devgames.database.DBHelper;
+
+@DatabaseTable(tableName = DBHelper.Tables.COMMITS)
 public class Commit extends AbsSynchronizable implements Serializable {
 
     public static class Column {

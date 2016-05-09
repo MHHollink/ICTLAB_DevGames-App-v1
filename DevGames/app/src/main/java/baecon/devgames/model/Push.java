@@ -1,13 +1,18 @@
 package baecon.devgames.model;
 
+import android.widget.LinearLayout;
+
 import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.Set;
 
-@DatabaseTable(tableName = "pushes")
+import baecon.devgames.database.DBHelper;
+
+@DatabaseTable(tableName = DBHelper.Tables.PUSHES)
 public class Push extends AbsSynchronizable implements Serializable {
 
     public static class Column{
@@ -23,13 +28,13 @@ public class Push extends AbsSynchronizable implements Serializable {
     private Project project;
 
     @DatabaseField(columnName = Column.COMMITS, dataType = DataType.SERIALIZABLE)
-    private Set<Commit> commits;
+    private HashMap<Long, Commit> commits;
 
     @DatabaseField(columnName = Column.ISSUES, dataType = DataType.SERIALIZABLE)
-    private Set<Issue> issues;
+    private HashMap<Long, Issue> issues;
 
     @DatabaseField(columnName = Column.DUPLICATION, dataType = DataType.SERIALIZABLE)
-    private Set<Duplication> duplications;
+    private HashMap<Long, Duplication> duplications;
 
     @DatabaseField(columnName = Column.TIMESTAMP)
     private long timestamp;
@@ -40,7 +45,7 @@ public class Push extends AbsSynchronizable implements Serializable {
     public Push() {
     }
 
-    public Push(Long id, Set<Commit> commits, Set<Duplication> duplications, Set<Issue> issues, Project project, double score, long timestamp) {
+    public Push(Long id, HashMap<Long, Commit> commits, HashMap<Long, Duplication> duplications, HashMap<Long, Issue> issues, Project project, double score, long timestamp) {
         super(id);
         this.commits = commits;
         this.duplications = duplications;
@@ -50,27 +55,27 @@ public class Push extends AbsSynchronizable implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public Set<Commit> getCommits() {
+    public HashMap<Long, Commit> getCommits() {
         return commits;
     }
 
-    public void setCommits(Set<Commit> commits) {
+    public void setCommits(HashMap<Long, Commit> commits) {
         this.commits = commits;
     }
 
-    public Set<Duplication> getDuplications() {
+    public HashMap<Long, Duplication> getDuplications() {
         return duplications;
     }
 
-    public void setDuplications(Set<Duplication> duplications) {
+    public void setDuplications(HashMap<Long, Duplication> duplications) {
         this.duplications = duplications;
     }
 
-    public Set<Issue> getIssues() {
+    public HashMap<Long, Issue> getIssues() {
         return issues;
     }
 
-    public void setIssues(Set<Issue> issues) {
+    public void setIssues(HashMap<Long, Issue> issues) {
         this.issues = issues;
     }
 

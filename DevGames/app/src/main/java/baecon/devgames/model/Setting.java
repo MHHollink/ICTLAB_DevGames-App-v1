@@ -5,7 +5,9 @@ import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 
-@DatabaseTable(tableName = "settings")
+import baecon.devgames.database.DBHelper;
+
+@DatabaseTable(tableName = DBHelper.Tables.SETTINGS)
 public class Setting implements Serializable {
 
     public static class Column {
