@@ -14,7 +14,6 @@ public class CommitDTO implements ModelDTO<Commit> {
     private Project project;
     private long time;
     private String title;
-    private double score;
 
     @Override
     public Long getId() {
@@ -33,7 +32,6 @@ public class CommitDTO implements ModelDTO<Commit> {
         commit.setProject(project);
         commit.setTimestamp(time);
         commit.setTitle(title);
-        commit.setScore(score);
 
         return commit;
     }
@@ -99,13 +97,5 @@ public class CommitDTO implements ModelDTO<Commit> {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public double getScore() {
-        return score;
-    }
-
-    public void setScore(double score) {
-        this.score = score;
     }
 }

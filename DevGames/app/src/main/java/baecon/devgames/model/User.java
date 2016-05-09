@@ -211,14 +211,12 @@ public class User extends AbsSynchronizable implements Serializable {
         return result;
     }
 
-    /**
-     * TODO
-     */
     public double getScore() {
         double score=0;
-//        for (Push push : pushes.values()) {
-//            score += push.getScore();
-//        }
+        if(pushes != null && !pushes.isEmpty()) {
+            for (Push push : pushes.values())
+                score += push.getScore();
+        }
         return score;
     }
 

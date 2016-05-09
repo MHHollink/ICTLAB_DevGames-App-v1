@@ -19,7 +19,6 @@ public class Commit extends AbsSynchronizable implements Serializable {
         public static final String BRANCH = "branch";
         public static final String FILES_CHANGED = "filesChanges";
         public static final String TIME = "timestamp";
-        public static final String SCORE = "score";
     }
 
     @DatabaseField(columnName = Column.PROJECT, dataType = DataType.SERIALIZABLE)
@@ -43,10 +42,7 @@ public class Commit extends AbsSynchronizable implements Serializable {
     @DatabaseField(columnName = Column.TIME)
     private long timestamp;
 
-    @DatabaseField(columnName = Column.SCORE)
-    private double score;
-
-    public Commit(Project project, User committee, String title, String hash, String branch, int filesChanges, long timestamp, double score) {
+    public Commit(Project project, User committee, String title, String hash, String branch, int filesChanges, long timestamp) {
         this.project = project;
         this.committee = committee;
         this.title = title;
@@ -54,11 +50,10 @@ public class Commit extends AbsSynchronizable implements Serializable {
         this.branch = branch;
         this.filesChanges = filesChanges;
         this.timestamp = timestamp;
-        this.score = score;
     }
 
     public Commit() {
-        this(null, null, null, null, null, 0, 0, 0);
+
     }
 
     public Project getProject() {
@@ -117,14 +112,6 @@ public class Commit extends AbsSynchronizable implements Serializable {
         this.timestamp = timestamp;
     }
 
-    public double getScore() {
-        return score;
-    }
-
-    public void setScore(double score) {
-        this.score = score;
-    }
-
 
     @Override
     public boolean contentEquals(Object other) {
@@ -137,7 +124,6 @@ public class Commit extends AbsSynchronizable implements Serializable {
                 committee.equals(o.getCommittee()) &&
                 title.equals(o.getTitle()) &&
                 hash.equals(o.getHash()) &&
-                score == o.getScore() &&
                 branch.equals(o.getBranch()) &&
                 filesChanges == o.getFilesChanges();
 

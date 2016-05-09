@@ -86,6 +86,16 @@ public class Project extends AbsSynchronizable implements Serializable {
         this.pushes = pushes;
     }
 
+    public double getScore() {
+        double score=0;
+        if(pushes != null && !pushes.isEmpty()) {
+            for (Push push : pushes.values())
+                score += push.getScore();
+        }
+        return score;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
