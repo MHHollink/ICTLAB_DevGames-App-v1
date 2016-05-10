@@ -1,11 +1,13 @@
-package baecon.devgames.events.user;
+package baecon.devgames.events.projects;
 
 import java.util.HashSet;
 
 import baecon.devgames.events.SynchronizableModelUpdatedEvent;
 
-public class UsersUpdatedEvent extends SynchronizableModelUpdatedEvent {
-
+/**
+ * Created by Marcel on 10-5-2016.
+ */
+public class ProjectsUpdatedEvent extends SynchronizableModelUpdatedEvent {
     /**
      * Create a new event the indicates what type of change has been made to one or more instances of the model. Pass
      * {@code null} to parameters you don't use.
@@ -17,7 +19,7 @@ public class UsersUpdatedEvent extends SynchronizableModelUpdatedEvent {
      *                database. Null allowed if none.
      * @param updated
      */
-    public UsersUpdatedEvent(Integer result, HashSet<Long> removed, HashSet<Long> added, HashSet<Long> updated) {
+    public ProjectsUpdatedEvent(Integer result, HashSet<Long> removed, HashSet<Long> added, HashSet<Long> updated) {
         super(result, removed, added, updated);
     }
 }

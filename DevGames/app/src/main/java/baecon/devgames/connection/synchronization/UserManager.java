@@ -19,13 +19,12 @@ import baecon.devgames.connection.task.push.PushUserTask;
 import baecon.devgames.database.modelupdate.Operation;
 import baecon.devgames.database.task.SaveUserTask;
 import baecon.devgames.events.BusProvider;
-import baecon.devgames.events.PushTaskDoneEvent;
 import baecon.devgames.events.user.UserPushTaskDoneEvent;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
 import baecon.devgames.util.L;
 
-public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, PushTaskDoneEvent>{
+public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, UserPushTaskDoneEvent>{
 
     private static UserManager instance;
 

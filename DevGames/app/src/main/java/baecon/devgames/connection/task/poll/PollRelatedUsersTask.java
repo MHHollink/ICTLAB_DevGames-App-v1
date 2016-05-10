@@ -33,7 +33,7 @@ public class PollRelatedUsersTask extends ModelPollTask<User, UserUpdate, UserDT
 
     @Override
     protected List<UserDTO> doPoll(DevGamesClient client) {
-        return client.getUsers(projectId);
+        return client.getUsersFromProject(projectId);
     }
 
     @Override
