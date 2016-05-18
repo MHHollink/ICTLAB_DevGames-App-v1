@@ -8,6 +8,7 @@ import com.j256.ormlite.stmt.UpdateBuilder;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Random;
 
 import baecon.devgames.database.modelupdate.IModelUpdate;
 import baecon.devgames.database.modelupdate.Operation;
@@ -209,7 +210,7 @@ public abstract class ModelCUDTask<Model extends ISynchronizable, ModelUpdate ex
     protected void onCreate(Model model) throws SQLException {
 
         // TODO don't user 0 for new models
-        model.setId(0l);
+        model.setId(new Random().nextLong());
         model.setState(State.NEW);
 
         L.v("{0}", model);

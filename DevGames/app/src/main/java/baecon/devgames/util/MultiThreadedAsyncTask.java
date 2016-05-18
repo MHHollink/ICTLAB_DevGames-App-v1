@@ -1,7 +1,15 @@
 package baecon.devgames.util;
 
-import android.os.AsyncTask;
-
+/**
+ * A base class for asynchronous calls.
+ *
+ * @param <P>
+ *         The type of parameters passed to the `doInBackground` method.
+ * @param <I>
+ *         The type of the increment (Integer usually).
+ * @param <R>
+ *         The type of the return value of the `doInBackground` method.
+ */
 public abstract class MultiThreadedAsyncTask<P, I, R> extends AsyncTask<P, I, R> {
 
     /**

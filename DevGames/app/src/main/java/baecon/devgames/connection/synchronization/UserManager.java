@@ -1,7 +1,6 @@
 package baecon.devgames.connection.synchronization;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 
 import com.squareup.otto.Subscribe;
@@ -22,6 +21,7 @@ import baecon.devgames.events.BusProvider;
 import baecon.devgames.events.user.UserPushTaskDoneEvent;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.UserUpdate;
+import baecon.devgames.util.AsyncTask;
 import baecon.devgames.util.L;
 
 public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, UserPushTaskDoneEvent>{

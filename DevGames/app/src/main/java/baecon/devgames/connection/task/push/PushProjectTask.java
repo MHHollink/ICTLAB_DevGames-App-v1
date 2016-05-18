@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
 
-import baecon.devgames.DevGamesApplication;
 import baecon.devgames.model.Project;
 import baecon.devgames.model.update.ProjectUpdate;
 

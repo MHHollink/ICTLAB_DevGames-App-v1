@@ -11,18 +11,13 @@ import java.util.List;
 
 import baecon.devgames.connection.client.DevGamesClient;
 import baecon.devgames.connection.client.dto.ProjectDTO;
-import baecon.devgames.connection.client.dto.UserDTO;
-import baecon.devgames.connection.synchronization.AbsModelManager;
 import baecon.devgames.connection.synchronization.ProjectManager;
 import baecon.devgames.database.DBHelper;
-import baecon.devgames.events.BusProvider;
-import baecon.devgames.events.SynchronizableModelUpdatedEvent;
 import baecon.devgames.events.projects.ProjectsUpdatedEvent;
 import baecon.devgames.model.Project;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.ProjectUpdate;
 import baecon.devgames.util.L;
-import baecon.devgames.util.Utils;
 
 public class PollProjectTask extends ModelPollTask<Project, ProjectUpdate, ProjectDTO>{
     private Long userId;

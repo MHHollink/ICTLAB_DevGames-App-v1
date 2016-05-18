@@ -23,6 +23,9 @@ import baecon.devgames.util.L;
 import baecon.devgames.util.PreferenceManager;
 import retrofit.RetrofitError;
 
+/**
+ * An asynchronous task performing the login of a user.
+ */
 public class LoginTask extends RESTTask< Void, Void, Integer> {
 
     // The prefix of the message identifier (see onPostExecute(...))
@@ -163,13 +166,17 @@ public class LoginTask extends RESTTask< Void, Void, Integer> {
             return LOCAL_DB_ERROR;
         }
 
+//        new PollRelatedUsersTask(context.getApplicationContext(), UserManager.get(getApplication()))
+//                .executeOnExecutor(new CurrentThreadExecutor());
+
+        L.d("successfully logged in user: {0}", getLoggedInUser().getId());
 
         return OK;
     }
 
     @Override
     protected void onPostExecute(Integer httpStatus) {
-        super.onPostExecute(httpStatus);
+
         L.d("onPostExecute, httpStatus={0}", httpStatus);
 
         Resources resources = this.context.getResources();

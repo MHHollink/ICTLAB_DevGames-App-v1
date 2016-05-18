@@ -1,7 +1,6 @@
 package baecon.devgames.connection.synchronization;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -18,6 +17,7 @@ import baecon.devgames.database.modelupdate.IModelUpdate;
 import baecon.devgames.events.PushTaskDoneEvent;
 import baecon.devgames.model.AbsSynchronizable;
 import baecon.devgames.model.update.AbsModelUpdate;
+import baecon.devgames.util.AsyncTask;
 import baecon.devgames.util.L;
 import baecon.devgames.util.Utils;
 

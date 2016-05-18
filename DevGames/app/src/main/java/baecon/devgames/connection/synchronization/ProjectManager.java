@@ -1,12 +1,10 @@
 package baecon.devgames.connection.synchronization;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 
 import java.io.Serializable;
 import java.util.concurrent.Executor;
-import java.util.concurrent.TimeUnit;
 
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.connection.client.dto.ProjectDTO;
@@ -20,8 +18,8 @@ import baecon.devgames.events.BusProvider;
 import baecon.devgames.events.projects.ProjectPushTaskDoneEvent;
 import baecon.devgames.model.Project;
 import baecon.devgames.model.User;
-import baecon.devgames.model.update.AbsModelUpdate;
 import baecon.devgames.model.update.ProjectUpdate;
+import baecon.devgames.util.AsyncTask;
 import baecon.devgames.util.L;
 
 /**

@@ -1,12 +1,11 @@
 package baecon.devgames.model;
 
-
-import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.dao.ForeignCollection;
 import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.util.Utils;
@@ -51,24 +50,22 @@ public class User extends AbsSynchronizable implements Serializable {
     @DatabaseField(columnName = Column.JOB)
     private String mainJob;
 
-    @DatabaseField(columnName = Column.PROJECTS, dataType = DataType.SERIALIZABLE)
-    private HashMap<Long, Project> projects;
+    @ForeignCollectionField(eager = true)
+    private ForeignCollection<Project> projects;
 
-    @DatabaseField(columnName = Column.PUSH, dataType = DataType.SERIALIZABLE)
-    private HashMap<Long, Push> pushes;
+    @ForeignCollectionField(eager = true)
+    private ForeignCollection<Push> pushes;
 
-    public User(Long id, String username, String gitUsername, HashMap<Long, Project> projects, String gcmKey, String firstName, String tween, String lastName, int age, String mainJob, HashMap<Long, Push> pushes) {
+    public User(Long id, String username, String gitUsername, String gcmKey, String firstName, String tween, String lastName, int age, String mainJob) {
         super(id);
         this.username = username;
         this.gitUsername = gitUsername;
-        this.projects = projects;
         this.gcmKey = gcmKey;
         this.firstName = firstName;
         this.tween = tween;
         this.lastName = lastName;
         this.age = age;
         this.mainJob = mainJob;
-        this.pushes = pushes;
     }
 
     public User() {
@@ -90,12 +87,8 @@ public class User extends AbsSynchronizable implements Serializable {
         this.gitUsername = gitUsername;
     }
 
-    public HashMap<Long, Project> getProjects() {
+    public ForeignCollection<Project> getProjects() {
         return projects;
-    }
-
-    public void setProjects(HashMap<Long, Project> projects) {
-        this.projects = projects;
     }
 
     public String getGcmKey() {
@@ -146,12 +139,8 @@ public class User extends AbsSynchronizable implements Serializable {
         this.mainJob = mainJob;
     }
 
-    public HashMap<Long, Push> getPushes() {
+    public ForeignCollection<Push> getPushes() {
         return pushes;
-    }
-
-    public void setPushes(HashMap<Long, Push> pushes) {
-        this.pushes = pushes;
     }
 
     public void merge(User user) {
@@ -214,7 +203,7 @@ public class User extends AbsSynchronizable implements Serializable {
     public double getScore() {
         double score=0;
         if(pushes != null && !pushes.isEmpty()) {
-            for (Push push : pushes.values())
+            for (Push push : pushes)
                 score += push.getScore();
         }
         return score;

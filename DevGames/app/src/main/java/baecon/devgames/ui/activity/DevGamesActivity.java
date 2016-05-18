@@ -14,7 +14,6 @@ import com.squareup.otto.Subscribe;
 
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.R;
-import baecon.devgames.connection.synchronization.UserManager;
 import baecon.devgames.connection.task.LogoutTask;
 import baecon.devgames.events.BusProvider;
 import baecon.devgames.events.LogoutEvent;
@@ -33,7 +32,10 @@ public abstract class DevGamesActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
+        L.d("onCreate");
 
         preferenceManager = PreferenceManager.get(this);
 
@@ -43,36 +45,6 @@ public abstract class DevGamesActivity extends AppCompatActivity {
         logoutProgressDialog.setMessage(getString(R.string.logging_out));
         logoutProgressDialog.setIndeterminate(true);
         logoutProgressDialog.setCancelable(false);
-    }
-
-    /**
-     * Called when Android resumes this Activity.
-     */
-    @Override
-    protected void onResume() {
-
-        super.onResume();
-
-        L.d("* onResume");
-
-        doLoginCheck();
-
-        BusProvider.getBus().register(this);
-        UserManager.get(this).init();
-    }
-
-    /**
-     * Called when Android pauses this Activity.
-     */
-    @Override
-    protected void onPause() {
-
-        super.onPause();
-
-        L.d("* onPause");
-
-        BusProvider.getBus().unregister(this);
-        UserManager.get(this).shutdown();
     }
 
     @Override
@@ -87,6 +59,37 @@ public abstract class DevGamesActivity extends AppCompatActivity {
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
             }
         }
+    }
+
+    /**
+     * Called when Android resumes this Activity.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        L.d("* onResume");
+
+        doLoginCheck();
+
+        BusProvider.getBus().register(this);
+    }
+
+    /**
+     * Called when Android pauses this Activity.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        L.d("* onPause");
+
+        BusProvider.getBus().unregister(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        L.d("* onDestroy");
     }
 
     @Override
@@ -109,14 +112,12 @@ public abstract class DevGamesActivity extends AppCompatActivity {
     private void doLogout(boolean checkUnSyncedWork) {
         logoutProgressDialog.show();
 
-        preferenceManager.setRememberPasswordEnabled(false);
-        preferenceManager.setLastUsedUsername(null);
-
         new LogoutTask(this, checkUnSyncedWork).executeThreaded();
     }
 
     protected void doLoginCheck() {
         if (!isLoggedIn()) {
+            L.i("not logged in yet, starting LoginActivity");
 
             // If the user is not logged in, start the login Activity.
             startActivity(new Intent(this, LoginActivity.class));
@@ -134,6 +135,7 @@ public abstract class DevGamesActivity extends AppCompatActivity {
      * @return true iff the user is logged in.
      */
     public boolean isLoggedIn() {
+        L.d("* isLoggedIn");
         return getDevGamesApplication().getLoggedInUser() != null;
     }
 
@@ -144,25 +146,6 @@ public abstract class DevGamesActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-    }
-
-    /**
-     * Returns the {@link baecon.devgames.util.PreferenceManager} for this app. This is meant for retrieval and saving
-     * small preferences in the {@link android.content.SharedPreferences}. This is initialized in {@link
-     * #onCreate(android.os.Bundle)}.
-     *
-     * @return The {@link baecon.devgames.util.PreferenceManager} for this app
-     */
-    public PreferenceManager getPreferenceManager() {
-        return preferenceManager;
-    }
-
-    public DevGamesApplication getDevGamesApplication() {
-        return (DevGamesApplication) getApplication();
-    }
-
-    public Toolbar getToolbar() {
-        return toolbar;
     }
 
     @Subscribe
@@ -199,5 +182,24 @@ public abstract class DevGamesActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
+    }
+
+    /**
+     * Returns the {@link baecon.devgames.util.PreferenceManager} for this app. This is meant for retrieval and saving
+     * small preferences in the {@link android.content.SharedPreferences}. This is initialized in {@link
+     * #onCreate(android.os.Bundle)}.
+     *
+     * @return The {@link baecon.devgames.util.PreferenceManager} for this app
+     */
+    public PreferenceManager getPreferenceManager() {
+        return preferenceManager;
+    }
+
+    public DevGamesApplication getDevGamesApplication() {
+        return (DevGamesApplication) getApplication();
+    }
+
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 }

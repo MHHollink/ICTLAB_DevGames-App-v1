@@ -1,6 +1,5 @@
 package baecon.devgames.connection.task.push;
 
-
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
@@ -104,7 +103,7 @@ public abstract class ModelPushTask<ModelClass extends ISynchronizable, ModelUpd
         // Set up the interface between the app and the back-end
         DevGamesClient client = super.createService();
 
-        L.v("Model={0}, amount of updates in queue: {1} Retrieved DAO and created AskClient", getClass().getSimpleName(),
+        L.v("Model={0}, amount of updates in queue: {1} Retrieved DAO and created DevGamesClient", getClass().getSimpleName(),
                 modelUpdateQueue.size());
 
         // Loop through the queue of updates that are ready to be synchronized

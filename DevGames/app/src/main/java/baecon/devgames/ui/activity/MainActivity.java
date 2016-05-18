@@ -3,14 +3,20 @@ package baecon.devgames.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.squareup.otto.Subscribe;
 
+import java.util.Stack;
+
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.R;
+import baecon.devgames.connection.synchronization.UserManager;
 import baecon.devgames.connection.task.GcmRegistrationTask;
 import baecon.devgames.events.LogoutEvent;
 import baecon.devgames.ui.fragment.ProfileFragment;
@@ -26,17 +32,43 @@ public class MainActivity extends DevGamesActivity {
      * The class responsible for transitions between tab-fragments.
      */
     private SlidingTabLayout indicator = null;
-    private ViewPager adapter;
+    private ViewPager pager;
+    private ViewPageAdapter adapter;
 
+    private Handler handler;
+
+    private ViewPager.SimpleOnPageChangeListener pageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+        @Override
+        public void onPageSelected(int position) {
+
+            L.d("onPageSelected ({0})", position);
+
+            // hideSearchView(); // TODO: 17-5-2016 when search view eneabled on lists views.
+
+            previousFragmentPositions.push(position);
+
+            supportInvalidateOptionsMenu();
+        }
+    };
+
+    /**
+     * A stack keeping track of the position indexes of the tab-fragments.
+     */
+    private Stack<Integer> previousFragmentPositions = new Stack<>();
+
+    private boolean resumed = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        L.d("onCreate");
+
+
+
         setContentView(R.layout.main_activity);
 
-
-        ViewPageAdapter viewPageAdapter = new ViewPageAdapter(getSupportFragmentManager());
+        adapter = new ViewPageAdapter(getSupportFragmentManager());
 
         // Create Profile TAB
         ProfileFragment profile = new ProfileFragment();
@@ -53,18 +85,23 @@ public class MainActivity extends DevGamesActivity {
         projects.setTitle(DevGamesApplication.get(this).getString(R.string.project));
 
         // Add pages to the viewpager
-        viewPageAdapter.addTab(
-                profile //, projects
+        adapter.addTab(
+                profile //, projects // TODO: 17-5-2016 more tabs
         );
 
-        adapter = (ViewPager) findViewById(R.id.activity_main_viewpager);
-        adapter.setAdapter(viewPageAdapter);
+        // Add the index of the first fragment to the stack.
+        previousFragmentPositions.push(0);
 
+        // Attach the adapter to the layout's fragment viewer.
+        pager = (ViewPager) findViewById(R.id.activity_main_viewpager);
+        pager.setAdapter(adapter);
+
+        // Attach the fragment viewer to the tabs.
         indicator = (SlidingTabLayout) findViewById(R.id.tabs);
-
-        indicator.setSelectedIndicatorColors(getResources().getColor(R.color.cornflower_light));
         indicator.setDistributeEvenly(true);
-        indicator.setViewPager(adapter);
+        indicator.setSelectedIndicatorColors(getResources().getColor(R.color.cornflower_light));
+        indicator.setViewPager(pager);
+        indicator.setOnPageChangeListener(pageChangeListener);
     }
 
     @Override
@@ -77,33 +114,17 @@ public class MainActivity extends DevGamesActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        adapter = null;
-        indicator = null;
-
-        super.onDestroy();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-
-        return true;
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
+
+        resumed = true;
 
         if (Utils.playServicesAvailable(this)) {
 
             // Check registration id
             new GcmRegistrationTask(this).executeThreaded();
 
-        }
-        else {
+        } else {
 
             L.w("Google Play Services is not available on this device! Showing dialog = {0}",
                     getPreferenceManager().getShowPlayServicesDialog());
@@ -158,6 +179,92 @@ public class MainActivity extends DevGamesActivity {
                             }
                         })
                         .show();
+            }
+        }
+
+        UserManager.get(this).startForegroundSyncMode();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        resumed = false;
+
+        UserManager.get(this).stopForegroundSyncMode();
+    }
+
+    @Override
+    protected void onDestroy() {
+        adapter = null;
+        indicator = null;
+
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        supportInvalidateOptionsMenu();
+
+        // Listen for fragment changes and push them on the stack
+        indicator.setOnPageChangeListener(pageChangeListener);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        L.d("onOptionsItemSelected, selectedPage: {0}, item: {1}", pager.getCurrentItem(), item.getTitle());
+
+        if (adapter == null) {
+            L.e("Menu Options item selected could not be executed, because the adapter is null!");
+            return false;
+        }
+
+        Fragment lastFragment = (Fragment) adapter.instantiateItem(pager, pager.getCurrentItem());
+
+        int i = item.getItemId();
+        if (i == R.id.menu_btn_settings) {
+            // startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
+        else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if (previousFragmentPositions == null) {
+            super.onBackPressed();
+        }
+
+        if (previousFragmentPositions.isEmpty()) {
+            super.onBackPressed(); // No history, exit the app.
+        } else {
+
+            // Go back to the previous fragment.
+            previousFragmentPositions.pop();
+
+            if (previousFragmentPositions.isEmpty()) {
+                onBackPressed();
+            } else {
+                final int previousTabIndex = previousFragmentPositions.peek();
+                handler.post(new Runnable() {
+                    public void run() {
+                        pager.setCurrentItem(previousTabIndex, resumed);
+                    }
+                });
             }
         }
     }

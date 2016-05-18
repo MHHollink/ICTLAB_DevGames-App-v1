@@ -5,7 +5,6 @@ import android.content.Context;
 import com.j256.ormlite.dao.Dao;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 
 import baecon.devgames.connection.synchronization.ProjectManager;
 import baecon.devgames.database.DBHelper;
