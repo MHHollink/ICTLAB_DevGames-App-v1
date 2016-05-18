@@ -16,6 +16,10 @@ public class ProjectDTO implements ModelDTO<Project> {
     private Set<User> developers;
     private Set<Commit> commits;
 
+    public ProjectDTO(Project project) {
+
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -25,6 +29,7 @@ public class ProjectDTO implements ModelDTO<Project> {
     public Project toModel() {
         Project project = new Project();
 
+        project.setId(id);
         project.setName(name);
         project.setDescription(description);
         project.setOwner(owner);

@@ -11,8 +11,7 @@ import baecon.devgames.database.DBHelper;
 public class Commit extends AbsSynchronizable implements Serializable {
 
     public static class Column {
-        public static final String PROJECT = "project";
-        public static final String COMMITTEE = "committee";
+        public static final String PUSHED_IN = "pushedIn";
         public static final String TITLE = "title";
         public static final String HASH = "hash";
         public static final String BRANCH = "branch";
@@ -20,11 +19,9 @@ public class Commit extends AbsSynchronizable implements Serializable {
         public static final String TIME = "timestamp";
     }
 
-    @DatabaseField(columnName = Column.PROJECT, foreign = true, foreignAutoRefresh = true)
-    private Project project;
 
-    @DatabaseField(columnName = Column.COMMITTEE, foreign = true, foreignAutoRefresh = true)
-    private User committee;
+    @DatabaseField(columnName = Column.PUSHED_IN, foreign = true, foreignAutoRefresh = true)
+    private Push pushedIn;
 
     @DatabaseField(columnName = Column.TITLE)
     private String title;
@@ -41,9 +38,9 @@ public class Commit extends AbsSynchronizable implements Serializable {
     @DatabaseField(columnName = Column.TIME)
     private long timestamp;
 
-    public Commit(Project project, User committee, String title, String hash, String branch, int filesChanges, long timestamp) {
-        this.project = project;
-        this.committee = committee;
+    public Commit(long id, Push pushedIn, String title, String hash, String branch, int filesChanges, long timestamp) {
+        super(id);
+        this.pushedIn = pushedIn;
         this.title = title;
         this.hash = hash;
         this.branch = branch;
@@ -55,20 +52,12 @@ public class Commit extends AbsSynchronizable implements Serializable {
 
     }
 
-    public Project getProject() {
-        return project;
+    public Push getPushedIn() {
+        return pushedIn;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public User getCommittee() {
-        return committee;
-    }
-
-    public void setCommittee(User committee) {
-        this.committee = committee;
+    public void setPushedIn(Push pushedIn) {
+        this.pushedIn = pushedIn;
     }
 
     public String getTitle() {
@@ -119,8 +108,7 @@ public class Commit extends AbsSynchronizable implements Serializable {
 
         return id.equals(o.getId()) &&
                 timestamp == o.getTimestamp() &&
-                project.equals(o.getProject()) &&
-                committee.equals(o.getCommittee()) &&
+                pushedIn.equals(o.getPushedIn()) &&
                 title.equals(o.getTitle()) &&
                 hash.equals(o.getHash()) &&
                 branch.equals(o.getBranch()) &&

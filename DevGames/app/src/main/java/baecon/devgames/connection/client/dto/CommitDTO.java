@@ -1,17 +1,16 @@
 package baecon.devgames.connection.client.dto;
 
 import baecon.devgames.model.Commit;
-import baecon.devgames.model.Project;
-import baecon.devgames.model.User;
+import baecon.devgames.model.Push;
 
 public class CommitDTO implements ModelDTO<Commit> {
 
     private long id;
     private String branch;
-    private User committee;
+    private Push pushedIn;
     private int filesChanged;
     private String hash;
-    private Project project;
+
     private long time;
     private String title;
 
@@ -26,10 +25,9 @@ public class CommitDTO implements ModelDTO<Commit> {
 
         commit.setId(id);
         commit.setBranch(branch);
-        commit.setCommittee(committee);
+        commit.setPushedIn(pushedIn);
         commit.setFilesChanges(filesChanged);
         commit.setHash(hash);
-        commit.setProject(project);
         commit.setTimestamp(time);
         commit.setTitle(title);
 
@@ -51,14 +49,6 @@ public class CommitDTO implements ModelDTO<Commit> {
         this.branch = branch;
     }
 
-    public User getCommittee() {
-        return committee;
-    }
-
-    public void setCommittee(User committee) {
-        this.committee = committee;
-    }
-
     public int getFilesChanged() {
         return filesChanged;
     }
@@ -75,12 +65,12 @@ public class CommitDTO implements ModelDTO<Commit> {
         this.hash = hash;
     }
 
-    public Project getProject() {
-        return project;
+    public Push getPushedIn() {
+        return pushedIn;
     }
 
-    public void setProject(Project project) {
-        this.project = project;
+    public void setPushedIn(Push pushedIn) {
+        this.pushedIn = pushedIn;
     }
 
     public long getTime() {
@@ -97,5 +87,18 @@ public class CommitDTO implements ModelDTO<Commit> {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    @Override
+    public String toString() {
+        return "CommitDTO{" +
+                "branch='" + branch + '\'' +
+                ", id=" + id +
+                ", pushedIn=" + pushedIn +
+                ", filesChanged=" + filesChanged +
+                ", hash='" + hash + '\'' +
+                ", time=" + time +
+                ", title='" + title + '\'' +
+                '}';
     }
 }

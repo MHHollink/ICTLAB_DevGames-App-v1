@@ -72,9 +72,9 @@ public abstract class ModelPushTask<ModelClass extends ISynchronizable, ModelUpd
         // Retrieve the update queue for this model
         try {
             List<ModelUpdate> list = modelUpdateDao.queryBuilder()
-                    .orderBy(AbsModelUpdate.Column.LOCAL_ID, true)
+                    .orderBy(AbsModelUpdate.Column.ID, true)
                     .where()
-                    .eq(AbsModelUpdate.Column.LOCAL_ID, id)
+                    .eq(AbsModelUpdate.Column.ID, id)
                     .query();
 
             // If there are no updates in the database, end this task.

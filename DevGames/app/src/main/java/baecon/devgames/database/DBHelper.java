@@ -37,6 +37,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
     public class Tables {
         public static final String
                 USERS = "users", USER_UPDATES = "userupdates",
+                PROJECT_USER = "projectuser",
                 PROJECTS = "projects", PROJECT_UPDATE = "projectupdates",
                 PUSHES = "pushes", PUSH_UPDATE = "pushupdates",
                 COMMITS = "commits", COMMIT_UPDATE = "commitupdate",
@@ -49,7 +50,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "devgames.db";
 
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 19;
 
     private static int APP_VERSION_CODE;
 
@@ -97,6 +98,7 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
         oldTables.addAll(
                 Arrays.asList(
                         Tables.USERS, Tables.USER_UPDATES,
+                        Tables.PROJECT_USER,
                         Tables.PROJECT_UPDATE, Tables.PROJECTS,
                         Tables.PUSH_UPDATE, Tables.PUSHES,
                         Tables.COMMIT_UPDATE, Tables.COMMITS,

@@ -2,6 +2,8 @@ package baecon.devgames.connection.client.dto;
 
 import java.util.Set;
 
+import baecon.devgames.model.Project;
+import baecon.devgames.model.Push;
 import baecon.devgames.model.User;
 
 public class UserDTO implements ModelDTO<User> {
@@ -17,17 +19,21 @@ public class UserDTO implements ModelDTO<User> {
     public int age;
     public String mainJob;
 
-    public Set<ProjectDTO> projects;
-    public Set<PushDTO> pushes;
+    public Set<Project> projects;
+    public Set<Push> pushes;
 
-    public String session;
     public String gcmId;
 
     public UserDTO(User user){
         id = user.getId();
         username = user.getUsername();
         gitUsername = user.getGitUsername();
-
+        firstName = user.getFirstName();
+        tween = user.getTween();
+        lastName = user.getLastName();
+        age = user.getAge();
+        mainJob = user.getMainJob();
+        gcmId = user.getGcmId();
     }
 
     public UserDTO() {
@@ -41,7 +47,7 @@ public class UserDTO implements ModelDTO<User> {
         user.setId(id);
         user.setUsername(username);
         user.setGitUsername(gitUsername);
-        user.setGcmKey(gcmId);
+        user.setGcmId(gcmId);
         user.setAge(age);
         user.setFirstName(firstName);
         user.setLastName(lastName);
@@ -106,28 +112,20 @@ public class UserDTO implements ModelDTO<User> {
         this.mainJob = mainJob;
     }
 
-    public Set<ProjectDTO> getProjects() {
+    public Set<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(Set<ProjectDTO> projects) {
+    public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
 
-    public Set<PushDTO> getPushes() {
+    public Set<Push> getPushes() {
         return pushes;
     }
 
-    public void setPushes(Set<PushDTO> pushes) {
+    public void setPushes(Set<Push> pushes) {
         this.pushes = pushes;
-    }
-
-    public String getSession() {
-        return session;
-    }
-
-    public void setSession(String session) {
-        this.session = session;
     }
 
     public String getTween() {
@@ -159,7 +157,6 @@ public class UserDTO implements ModelDTO<User> {
                 ", mainJob='" + mainJob + '\'' +
                 ", projects=" + projects +
                 ", pushes=" + pushes +
-                ", session='" + session + '\'' +
                 ", gcmId='" + gcmId + '\'' +
                 '}';
     }

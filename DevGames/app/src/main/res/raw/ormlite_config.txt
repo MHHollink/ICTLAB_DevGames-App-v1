@@ -1,5 +1,5 @@
 #
-# generated on 2016/05/18 04:06:10
+# generated on 2016/05/18 10:28:57
 #
 # --table-start--
 dataClass=baecon.devgames.model.User
@@ -14,7 +14,7 @@ fieldName=gitUsername
 columnName=git_username
 # --field-end--
 # --field-start--
-fieldName=gcmKey
+fieldName=gcmId
 columnName=gcm_registration_key
 # --field-end--
 # --field-start--
@@ -110,6 +110,28 @@ columnName=operation
 # --table-end--
 #################################
 # --table-start--
+dataClass=baecon.devgames.model.ProjectUser
+tableName=projectuser
+# --table-fields-start--
+# --field-start--
+fieldName=id
+columnName=id
+generatedId=true
+# --field-end--
+# --field-start--
+fieldName=user
+columnName=user
+foreign=true
+# --field-end--
+# --field-start--
+fieldName=project
+columnName=project
+foreign=true
+# --field-end--
+# --table-fields-end--
+# --table-end--
+#################################
+# --table-start--
 dataClass=baecon.devgames.model.Project
 tableName=projects
 # --table-fields-start--
@@ -117,8 +139,6 @@ tableName=projects
 fieldName=owner
 columnName=owner
 dataPersister=SERIALIZABLE
-foreign=true
-foreignAutoRefresh=true
 # --field-end--
 # --field-start--
 fieldName=developers
@@ -207,6 +227,14 @@ tableName=pushes
 # --field-start--
 fieldName=project
 columnName=project
+dataPersister=SERIALIZABLE
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
+# --field-start--
+fieldName=pusher
+columnName=pusher
+dataPersister=SERIALIZABLE
 foreign=true
 foreignAutoRefresh=true
 # --field-end--
@@ -300,14 +328,8 @@ dataClass=baecon.devgames.model.Commit
 tableName=commits
 # --table-fields-start--
 # --field-start--
-fieldName=project
-columnName=project
-foreign=true
-foreignAutoRefresh=true
-# --field-end--
-# --field-start--
-fieldName=committee
-columnName=committee
+fieldName=pushedIn
+columnName=pushedIn
 foreign=true
 foreignAutoRefresh=true
 # --field-end--
@@ -397,6 +419,13 @@ columnName=operation
 dataClass=baecon.devgames.model.Issue
 tableName=issues
 # --table-fields-start--
+# --field-start--
+fieldName=pushedIn
+columnName=pushedIn
+dataPersister=SERIALIZABLE
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
 # --field-start--
 fieldName=issueId
 columnName=identifier
@@ -511,6 +540,12 @@ columnName=operation
 dataClass=baecon.devgames.model.Duplication
 tableName=duplications
 # --table-fields-start--
+# --field-start--
+fieldName=pushedIn
+columnName=pushedIn
+foreign=true
+foreignAutoRefresh=true
+# --field-end--
 # --field-start--
 fieldName=id
 columnName=id

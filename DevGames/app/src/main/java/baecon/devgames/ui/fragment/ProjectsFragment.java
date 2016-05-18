@@ -13,11 +13,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.R;
 import baecon.devgames.model.Project;
+import baecon.devgames.model.ProjectUser;
 
 public class ProjectsFragment extends DevGamesFragment implements DevGamesTab{
 
@@ -30,11 +32,14 @@ public class ProjectsFragment extends DevGamesFragment implements DevGamesTab{
 
         List<Project> projects = new ArrayList<>();
 
-        projects.addAll(
-                DevGamesApplication.get(this)
-                        .getLoggedInUser()
-                        .getProjects()
-        );
+        Iterator<ProjectUser> itor = DevGamesApplication.get(this)
+                .getLoggedInUser()
+                .getProjects()
+                .closeableIterator();
+
+        while (itor.hasNext()) {
+           projects.add( itor.next().getProject() );
+        }
 
         ListView listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(new ProjectsListAdapter(projects));

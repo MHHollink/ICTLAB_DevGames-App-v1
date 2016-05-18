@@ -18,11 +18,12 @@ public class Project extends AbsSynchronizable implements Serializable {
         public static final String NAME = "name";
         public static final String DESCRIPTION = "description";
     }
-    @DatabaseField(columnName = Column.OWNER, dataType = DataType.SERIALIZABLE, foreign = true, foreignAutoRefresh = true)
+
+    @DatabaseField(columnName = Column.OWNER, dataType = DataType.SERIALIZABLE)
     private User owner;
 
     @ForeignCollectionField(eager = true)
-    private ForeignCollection<User> developers;
+    private ForeignCollection<ProjectUser> developers;
 
     @ForeignCollectionField(eager = true)
     private ForeignCollection<Push> pushes;
@@ -68,7 +69,7 @@ public class Project extends AbsSynchronizable implements Serializable {
         this.owner = owner;
     }
 
-    public ForeignCollection<User> getDevelopers() {
+    public ForeignCollection<ProjectUser> getDevelopers() {
         return developers;
     }
 

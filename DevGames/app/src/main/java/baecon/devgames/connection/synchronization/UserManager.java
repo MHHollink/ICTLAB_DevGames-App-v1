@@ -91,7 +91,7 @@ public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, User
 
     @Override
     public long getForegroundPollingInterval() {
-        return TimeUnit.MINUTES.toMillis(2L);
+        return TimeUnit.MINUTES.toMillis(10L);
     }
 
     @Override

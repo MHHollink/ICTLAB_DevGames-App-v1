@@ -115,14 +115,14 @@ public class GcmRegistrationTask extends RESTTask<Void, Void, String> {
             return;
         }
 
-        String oldKey = loggedInUser.getGcmKey();
+        String oldKey = loggedInUser.getGcmId();
 
         // Only update if the new key is not null or empty, and the new key does not equal the old key
         if (!TextUtils.isEmpty(newGCMKey) && !newGCMKey.equals(oldKey)) {
 
             L.v("Saving new GCM key!");
 
-            loggedInUser.setGcmKey(newGCMKey);
+            loggedInUser.setGcmId(newGCMKey);
             UserManager.get(getContext()).update(loggedInUser);
 
         } else {

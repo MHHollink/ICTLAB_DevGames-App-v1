@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -34,7 +34,13 @@ public class PollRelatedUsersTask extends ModelPollTask<User, UserUpdate, UserDT
 
     @Override
     protected List<UserDTO> doPoll(DevGamesClient client) {
-        return projectId == null ? Collections.<UserDTO>emptyList() : client.getUsersFromProject(projectId);
+        if (projectId == null) {
+            List<UserDTO> list = new ArrayList<>();
+            list.add(client.getCurrentlyLoggedInUser());
+            return list;
+        }
+        else
+            return client.getUsersFromProject(projectId);
     }
 
     @Override

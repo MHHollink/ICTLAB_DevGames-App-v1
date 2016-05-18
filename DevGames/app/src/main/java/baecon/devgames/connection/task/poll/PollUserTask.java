@@ -74,7 +74,7 @@ public class PollUserTask extends RESTTask<Void, Void, Integer> {
 
             user = dto.toModel();
 
-            L.v("Retrieved user is in team {0}", user.getUsername());
+            L.v("Retrieved user {0}", user.getUsername());
 
             user.setId(userLocalId);
 

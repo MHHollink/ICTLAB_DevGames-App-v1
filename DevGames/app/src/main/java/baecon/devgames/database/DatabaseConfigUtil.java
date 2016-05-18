@@ -11,6 +11,7 @@ import baecon.devgames.model.Commit;
 import baecon.devgames.model.Duplication;
 import baecon.devgames.model.Issue;
 import baecon.devgames.model.Project;
+import baecon.devgames.model.ProjectUser;
 import baecon.devgames.model.Push;
 import baecon.devgames.model.Setting;
 import baecon.devgames.model.User;
@@ -64,6 +65,8 @@ public class DatabaseConfigUtil extends OrmLiteConfigUtil {
 
             User.class,
             UserUpdate.class,
+
+            ProjectUser.class,
 
             Project.class,
             ProjectUpdate.class,

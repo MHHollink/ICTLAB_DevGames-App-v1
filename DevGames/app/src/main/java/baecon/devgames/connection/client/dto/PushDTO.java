@@ -21,6 +21,10 @@ public class PushDTO implements ModelDTO<Push> {
     private long timestamp;
     private double score;
 
+    public PushDTO(Push push) {
+
+    }
+
     @Override
     public Long getId() {
         return id;
@@ -80,6 +84,12 @@ public class PushDTO implements ModelDTO<Push> {
 
     @Override
     public Push toModel() {
+        Push push = new Push();
+
+        push.setId(id);
+        push.setScore(score);
+        push.setTimestamp(timestamp);
+
         return null;
     } // TODO: 09-5-2016
 

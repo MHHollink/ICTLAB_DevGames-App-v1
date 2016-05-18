@@ -1,5 +1,6 @@
 package baecon.devgames.model;
 
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -26,7 +27,12 @@ public class Issue extends AbsSynchronizable implements Serializable{
         public static final String CREATION_DATE = "creation_date";
         public static final String UPDATE_DATE = "update_date";
         public static final String CLOSE_DATE = "close_date";
+        public static final String PUSHED_IN = "pushedIn";
     }
+
+
+    @DatabaseField(columnName = Column.PUSHED_IN, dataType = DataType.SERIALIZABLE, foreign = true, foreignAutoRefresh = true)
+    private Push pushedIn;
 
     @DatabaseField(columnName = Column.ISSUE_ID)
     private long issueId;
@@ -64,8 +70,9 @@ public class Issue extends AbsSynchronizable implements Serializable{
     @DatabaseField(columnName = Column.CLOSE_DATE)
     private long closeDate;
 
-    public Issue(Long id, long closeDate, String component, long creationDate, int debt, int endLine, long issueId, String message, String resolution, String severity, int startLine, String status, long updateDate) {
+    public Issue(Long id, Push pushedIn, long closeDate, String component, long creationDate, int debt, int endLine, long issueId, String message, String resolution, String severity, int startLine, String status, long updateDate) {
         super(id);
+        this.pushedIn = pushedIn;
         this.closeDate = closeDate;
         this.component = component;
         this.creationDate = creationDate;
@@ -81,6 +88,14 @@ public class Issue extends AbsSynchronizable implements Serializable{
     }
 
     public Issue() {
+    }
+
+    public Push getPushedIn() {
+        return pushedIn;
+    }
+
+    public void setPushedIn(Push pushedIn) {
+        this.pushedIn = pushedIn;
     }
 
     public long getCloseDate() {
@@ -201,4 +216,23 @@ public class Issue extends AbsSynchronizable implements Serializable{
     public boolean contentEquals(Object other) {
         return false;
     } // TODO: 09-5-2016
+
+    @Override
+    public String toString() {
+        return "Issue{" +
+                "closeDate=" + closeDate +
+                ", pushedIn=" + pushedIn +
+                ", issueId=" + issueId +
+                ", severity='" + severity + '\'' +
+                ", component='" + component + '\'' +
+                ", startLine=" + startLine +
+                ", endLine=" + endLine +
+                ", status='" + status + '\'' +
+                ", resolution='" + resolution + '\'' +
+                ", message='" + message + '\'' +
+                ", debt=" + debt +
+                ", creationDate=" + creationDate +
+                ", updateDate=" + updateDate +
+                "} " + super.toString();
+    }
 }

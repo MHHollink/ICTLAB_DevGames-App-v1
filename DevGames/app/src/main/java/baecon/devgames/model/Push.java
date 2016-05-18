@@ -1,6 +1,7 @@
 package baecon.devgames.model;
 
 import com.j256.ormlite.dao.ForeignCollection;
+import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
@@ -14,12 +15,16 @@ public class Push extends AbsSynchronizable implements Serializable {
 
     public static class Column{
         public static final String PROJECT = "project";
+        public static final String PUSHER = "pusher";
         public static final String TIMESTAMP = "timestamp";
         public static final String SCORE = "score";
     }
 
-    @DatabaseField(columnName = Column.PROJECT, foreign = true, foreignAutoRefresh = true)
+    @DatabaseField(columnName = Column.PROJECT, dataType = DataType.SERIALIZABLE, foreign = true, foreignAutoRefresh = true)
     private Project project;
+
+    @DatabaseField(columnName = Column.PUSHER, dataType = DataType.SERIALIZABLE, foreign = true, foreignAutoRefresh = true)
+    private User pusher;
 
     @ForeignCollectionField(eager = true)
     private ForeignCollection<Commit> commits;
@@ -39,9 +44,10 @@ public class Push extends AbsSynchronizable implements Serializable {
     public Push() {
     }
 
-    public Push(Long id, Project project, double score, long timestamp) {
+    public Push(Long id, Project project, User pusher, double score, long timestamp) {
         super(id);
         this.project = project;
+        this.pusher = pusher;
         this.score = score;
         this.timestamp = timestamp;
     }
@@ -64,6 +70,14 @@ public class Push extends AbsSynchronizable implements Serializable {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public User getPusher() {
+        return pusher;
+    }
+
+    public void setPusher(User pusher) {
+        this.pusher = pusher;
     }
 
     public double getScore() {

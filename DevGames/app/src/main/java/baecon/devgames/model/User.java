@@ -6,6 +6,8 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.util.Utils;
@@ -16,8 +18,6 @@ public class User extends AbsSynchronizable implements Serializable {
     public static class Column{
         public static final String USERNAME = "username";
         public static final String GIT_USER = "git_username";
-        public static final String PROJECTS = "projects";
-        public static final String PUSH = "pushes";
         public static final String GCM_KEY = "gcm_registration_key";
         public static final String FIRST_NAME = "fname";
         public static final String LAST_NAME = "lname";
@@ -33,7 +33,7 @@ public class User extends AbsSynchronizable implements Serializable {
     private String gitUsername;
 
     @DatabaseField(columnName = Column.GCM_KEY)
-    private String gcmKey;
+    private String gcmId;
 
     @DatabaseField(columnName = Column.FIRST_NAME)
     private String firstName;
@@ -51,16 +51,16 @@ public class User extends AbsSynchronizable implements Serializable {
     private String mainJob;
 
     @ForeignCollectionField(eager = true)
-    private ForeignCollection<Project> projects;
+    private ForeignCollection<ProjectUser> projects;
 
     @ForeignCollectionField(eager = true)
     private ForeignCollection<Push> pushes;
 
-    public User(Long id, String username, String gitUsername, String gcmKey, String firstName, String tween, String lastName, int age, String mainJob) {
+    public User(Long id, String username, String gitUsername, String gcmId, String firstName, String tween, String lastName, int age, String mainJob) {
         super(id);
         this.username = username;
         this.gitUsername = gitUsername;
-        this.gcmKey = gcmKey;
+        this.gcmId = gcmId;
         this.firstName = firstName;
         this.tween = tween;
         this.lastName = lastName;
@@ -87,16 +87,16 @@ public class User extends AbsSynchronizable implements Serializable {
         this.gitUsername = gitUsername;
     }
 
-    public ForeignCollection<Project> getProjects() {
+    public ForeignCollection<ProjectUser> getProjects() {
         return projects;
     }
 
-    public String getGcmKey() {
-        return gcmKey;
+    public String getGcmId() {
+        return gcmId;
     }
 
-    public void setGcmKey(String gcmKey) {
-        this.gcmKey = gcmKey;
+    public void setGcmId(String gcmId) {
+        this.gcmId = gcmId;
     }
 
     public String getFirstName() {
@@ -143,6 +143,23 @@ public class User extends AbsSynchronizable implements Serializable {
         return pushes;
     }
 
+    public Set<Push> getPushesAsSet() {
+        Set<Push> set = new HashSet<>();
+        for (Push push : pushes) {
+            set.add(push);
+        }
+        return set;
+    }
+
+    public Set<Project> getProjectsAsSet() {
+        Set<Project> set = new HashSet<>();
+        for (ProjectUser projectUser : projects) {
+            set.add(projectUser.getProject());
+        }
+        return set;
+    }
+
+
     public void merge(User user) {
         if(!Utils.isEmpty(user.getUsername())) {
             username = user.getUsername();
@@ -168,8 +185,8 @@ public class User extends AbsSynchronizable implements Serializable {
         if(!Utils.isEmpty(user.getPushes())) {
             pushes = user.getPushes();
         }
-        if(!Utils.isEmpty(user.getGcmKey())) {
-            gcmKey = user.getGcmKey();
+        if(!Utils.isEmpty(user.getGcmId())) {
+            gcmId = user.getGcmId();
         }
     }
 
@@ -190,7 +207,7 @@ public class User extends AbsSynchronizable implements Serializable {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (gitUsername != null ? gitUsername.hashCode() : 0);
         result = 31 * result + (projects != null ? projects.hashCode() : 0);
-        result = 31 * result + (gcmKey != null ? gcmKey.hashCode() : 0);
+        result = 31 * result + (gcmId != null ? gcmId.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (tween != null ? tween.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
@@ -215,7 +232,7 @@ public class User extends AbsSynchronizable implements Serializable {
                 "username='" + username + '\'' +
                 ", gitUsername='" + gitUsername + '\'' +
                 ", projects=" + projects +
-                ", gcmKey='" + gcmKey + '\'' +
+                ", gcmId='" + gcmId + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", tween='" + tween + '\'' +
                 ", lastName='" + lastName + '\'' +
@@ -237,7 +254,7 @@ public class User extends AbsSynchronizable implements Serializable {
                 !(getUsername() != null ? !getUsername().equals(user.getUsername()) : user.getUsername() != null) &&
                 !(getGitUsername() != null ? !getGitUsername().equals(user.getGitUsername()) : user.getGitUsername() != null) &&
                 !(getProjects() != null ? !getProjects().equals(user.getProjects()) : user.getProjects() != null) &&
-                !(getGcmKey() != null ? !getGcmKey().equals(user.getGcmKey()) : user.getGcmKey() != null) &&
+                !(getGcmId() != null ? !getGcmId().equals(user.getGcmId()) : user.getGcmId() != null) &&
                 !(getFirstName() != null ? !getFirstName().equals(user.getFirstName()) : user.getFirstName() != null) &&
                 !(getTween() != null ? !getTween().equals(user.getTween()) : user.getTween() != null) &&
                 !(getLastName() != null ? !getLastName().equals(user.getLastName()) : user.getLastName() != null) &&
@@ -246,6 +263,6 @@ public class User extends AbsSynchronizable implements Serializable {
     }
 
     public void logout() {
-        setGcmKey(null);
+        setGcmId(null);
     }
 }
