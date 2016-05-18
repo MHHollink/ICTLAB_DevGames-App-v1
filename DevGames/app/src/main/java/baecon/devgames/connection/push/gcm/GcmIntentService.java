@@ -88,9 +88,9 @@ public class GcmIntentService extends IntentService{
                 case NEW_PUSH_RECEIVED:
 
                     notificationText = getString(R.string.new_score, intent.getStringExtra("text"));
-                    if ((notificationText == null || notificationText.isEmpty())) {
-                        notificationText = getString(R.string.new_score_default);
-                    }
+//                    if ((notificationText == null || notificationText.isEmpty())) {
+//                        notificationText = getString(R.string.new_score_default);
+//                    }
 
                     showNotification(
                             this,
@@ -100,10 +100,6 @@ public class GcmIntentService extends IntentService{
                             notificationText,
                             true
                     );
-
-                    new LogoutTask(this, false).executeThreaded();
-                    PreferenceManager.applyDefaultPreferences(this);
-                    DevGamesApplication.get(this).setLoggedInUser(null);
 
                     break;
 

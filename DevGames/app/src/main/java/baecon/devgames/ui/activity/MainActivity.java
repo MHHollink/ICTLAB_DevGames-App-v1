@@ -21,6 +21,7 @@ import baecon.devgames.connection.task.GcmRegistrationTask;
 import baecon.devgames.events.LogoutEvent;
 import baecon.devgames.ui.fragment.ProfileFragment;
 import baecon.devgames.ui.fragment.ProjectsFragment;
+import baecon.devgames.ui.fragment.UserPushesFragment;
 import baecon.devgames.ui.widget.SlidingTabLayout;
 import baecon.devgames.util.L;
 import baecon.devgames.util.Utils;
@@ -84,9 +85,13 @@ public class MainActivity extends DevGamesActivity {
         ProjectsFragment projects = new ProjectsFragment();
         projects.setTitle(DevGamesApplication.get(this).getString(R.string.project));
 
+        // Create Pushes Tab
+        UserPushesFragment pushes = new UserPushesFragment();
+        pushes.setTitle(DevGamesApplication.get(this).getString(R.string.pushes));
+
         // Add pages to the viewpager
         adapter.addTab(
-                profile //, projects // TODO: 17-5-2016 more tabs
+                profile, projects, pushes // TODO: 17-5-2016 more tabs
         );
 
         // Add the index of the first fragment to the stack.

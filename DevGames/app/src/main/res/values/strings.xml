@@ -49,6 +49,7 @@
     <string name="avatar">avatar</string>
     <string name="issues">issues</string>
     <string name="project">projects</string>
+    <string name="pushes">pushes</string>
     <string name="commits">commits</string>
     <string name="score">points</string>
     <string name="list_view_explanation">developers with a total of</string>
