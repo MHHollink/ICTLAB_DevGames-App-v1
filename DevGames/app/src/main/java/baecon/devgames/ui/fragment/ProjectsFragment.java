@@ -34,7 +34,6 @@ public class ProjectsFragment extends DevGamesFragment implements DevGamesTab{
                 DevGamesApplication.get(this)
                         .getLoggedInUser()
                         .getProjects()
-                        .values()
         );
 
         ListView listView = (ListView) view.findViewById(R.id.listView);
