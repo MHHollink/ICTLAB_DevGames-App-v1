@@ -16,6 +16,8 @@ import java.util.Stack;
 
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.R;
+import baecon.devgames.connection.synchronization.ProjectManager;
+import baecon.devgames.connection.synchronization.PushManager;
 import baecon.devgames.connection.synchronization.UserManager;
 import baecon.devgames.connection.task.GcmRegistrationTask;
 import baecon.devgames.events.LogoutEvent;
@@ -65,7 +67,8 @@ public class MainActivity extends DevGamesActivity {
 
         L.d("onCreate");
 
-
+        if (isLoggedIn())
+        return; // If user is not logged in, stop running the onCreate to avoid exceptions
 
         setContentView(R.layout.main_activity);
 
@@ -188,6 +191,8 @@ public class MainActivity extends DevGamesActivity {
         }
 
         UserManager.get(this).startForegroundSyncMode();
+        PushManager.get(this).startForegroundSyncMode();
+        ProjectManager.get(this).startForegroundSyncMode();
     }
 
     @Override
@@ -197,6 +202,8 @@ public class MainActivity extends DevGamesActivity {
         resumed = false;
 
         UserManager.get(this).stopForegroundSyncMode();
+        PushManager.get(this).stopForegroundSyncMode();
+        ProjectManager.get(this).stopForegroundSyncMode();
     }
 
     @Override

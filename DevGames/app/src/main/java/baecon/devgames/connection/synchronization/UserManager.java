@@ -96,7 +96,7 @@ public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, User
 
     @Override
     public boolean isAllowedToSyncInBackground() {
-        return true;
+        return false;
     }
 
     @Override

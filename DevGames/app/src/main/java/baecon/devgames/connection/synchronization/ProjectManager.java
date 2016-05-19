@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import java.io.Serializable;
 import java.util.concurrent.Executor;
+import java.util.concurrent.TimeUnit;
 
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.connection.client.dto.ProjectDTO;
@@ -91,7 +92,7 @@ public class ProjectManager extends AbsModelManager<Project, ProjectDTO, Project
 
     @Override
     public long getForegroundPollingInterval() {
-        return 0;
+        return TimeUnit.MINUTES.toMillis(30L);
     }
 
     @Override

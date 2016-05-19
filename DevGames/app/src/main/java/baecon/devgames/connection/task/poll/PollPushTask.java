@@ -10,19 +10,19 @@ import java.util.HashSet;
 import java.util.List;
 
 import baecon.devgames.connection.client.DevGamesClient;
-import baecon.devgames.connection.client.dto.ProjectDTO;
-import baecon.devgames.connection.synchronization.ProjectManager;
+import baecon.devgames.connection.client.dto.PushDTO;
+import baecon.devgames.connection.synchronization.PushManager;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.events.projects.ProjectsUpdatedEvent;
-import baecon.devgames.model.Project;
+import baecon.devgames.model.Push;
 import baecon.devgames.model.User;
-import baecon.devgames.model.update.ProjectUpdate;
+import baecon.devgames.model.update.PushUpdate;
 import baecon.devgames.util.L;
 
-public class PollProjectTask extends ModelPollTask<Project, ProjectUpdate, ProjectDTO>{
+public class PollPushTask extends ModelPollTask<Push, PushUpdate, PushDTO>{
     private Long userId;
     private Dao<User, Long> userDao;
-
+    private Dao<Push, Long> pushDao;
 
     /**
      * Creates a PollProjectsTask that will poll for <strong>ALL projects of ALL users</strong>. This is a very heavy
@@ -30,15 +30,16 @@ public class PollProjectTask extends ModelPollTask<Project, ProjectUpdate, Proje
      *
      * @param context Context to access network and database
      */
-    public PollProjectTask(Context context) {
+    public PollPushTask(Context context) {
         super(context, null);
     }
 
-    public PollProjectTask(Context context, Long userId) {
-        super(context, ProjectManager.get(context));
+    public PollPushTask(Context context, Long userId) {
+        super(context, PushManager.get(context));
         this.userId = userId;
 
         userDao = DBHelper.getUserDao(getDbHelper());
+        pushDao = DBHelper.getPushDao(getDbHelper());
     }
 
     @Override
@@ -51,9 +52,9 @@ public class PollProjectTask extends ModelPollTask<Project, ProjectUpdate, Proje
     }
 
     @Override
-    protected List<ProjectDTO> doPoll(DevGamesClient client) throws SQLException {
+    protected List<PushDTO> doPoll(DevGamesClient client) throws SQLException {
         List<User> users = null;
-        List<ProjectDTO> projectDTOs = new ArrayList<>();
+        List<PushDTO> pushDTOs = new ArrayList<>();
 
         try {
             if (userId != null) {
@@ -72,31 +73,38 @@ public class PollProjectTask extends ModelPollTask<Project, ProjectUpdate, Proje
 
         if (users != null) {
             for (User u : users) {
-                List<ProjectDTO> temp = client.getProjectsOfUser(u.getId());
+
+                Push push = pushDao.queryBuilder()
+                        .orderBy(Push.Column.TIMESTAMP, false)
+                        .where()
+                        .eq(Push.Column.PUSHER, u)
+                        .queryForFirst();
+
+                List<PushDTO> temp = client.getPushesOfUser(u.getId(), push.getTimestamp());
 
                 if (temp != null) {
-                    projectDTOs.addAll(temp);
+                    pushDTOs.addAll(temp);
                 }
             }
         } else {
             L.w("Got 0 users! Cannot retrieve projects");
         }
 
-        return projectDTOs;
+        return pushDTOs;
     }
 
     @Override
-    protected Project dtoToModel(ProjectDTO dto) {
+    protected Push dtoToModel(PushDTO dto) {
         return dto != null ? dto.toModel() : null;
     }
 
     @Override
-    protected Dao<Project, Long> getModelDao() {
-        return DBHelper.getProjectDao(getDbHelper()); // TODO: 09-5-2016
+    protected Dao<Push, Long> getModelDao() {
+        return DBHelper.getPushDao(getDbHelper()); // TODO: 09-5-2016
     }
 
     @Override
-    protected Dao<ProjectUpdate, Long> getModelUpdateDao() {
-        return DBHelper.getProjectUpdateDao(getDbHelper()); // TODO: 09-5-2016
+    protected Dao<PushUpdate, Long> getModelUpdateDao() {
+        return DBHelper.getPushUpdateDao(getDbHelper()); // TODO: 09-5-2016
     }
 }

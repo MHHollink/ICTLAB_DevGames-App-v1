@@ -28,6 +28,11 @@
     <string name="settings">Opties</string>
     <string name="loading">laden…</string>
 
+    <string name="sort_order">Sorteervolgorde</string>
+    <string name="filter">Filter</string>
+
+    <string name="list_no_items">Geen items</string>
+
     <string name="password">wachtwoord</string>
     <string name="username">gebruikersnaam</string>
     <string name="login">Login</string>

@@ -20,13 +20,18 @@
     <string name="date_dd_MMM_HH_mm">dd_MMM_HH_mm</string>
 
     <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
     <string name="enter_password">Please enter a valid password.</string>
     <string name="enter_username">Please enter a valid username.</string>
 
-
     <string name="settings">Settings</string>
     <string name="loading">loading…</string>
+
+    <string name="sort_order">Sort order</string>
+    <string name="filter">Filter</string>
+
+    <string name="list_no_items">No items</string>
 
     <string name="password">password</string>
     <string name="username">username</string>
@@ -55,7 +60,6 @@
     <string name="list_view_explanation">developers with a total of</string>
 
     <string name="new_message">You received a new notification</string>
-    <string name="cancel">Cancel</string>
     <string name="new_device_registered">Your account has been loggedin on another device!</string>
     <string name="new_score">Your last push had a score of: %s!</string>
     <string name="new_score_default">You have a new score for your push!</string>

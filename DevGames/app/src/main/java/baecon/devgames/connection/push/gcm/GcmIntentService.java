@@ -17,6 +17,7 @@ import android.support.v4.app.NotificationCompat;
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.R;
 import baecon.devgames.connection.task.LogoutTask;
+import baecon.devgames.connection.task.poll.PollPushTask;
 import baecon.devgames.ui.activity.LoginActivity;
 import baecon.devgames.ui.activity.MainActivity;
 import baecon.devgames.util.L;
@@ -100,6 +101,9 @@ public class GcmIntentService extends IntentService{
                             notificationText,
                             true
                     );
+
+                    new PollPushTask(this, DevGamesApplication.get(this).getLoggedInUser().getId())
+                            .executeThreaded();
 
                     break;
 
