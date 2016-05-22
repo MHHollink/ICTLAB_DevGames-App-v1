@@ -39,7 +39,13 @@ public class LoginActivity extends DevGamesActivity {
         username = (EditText) findViewById(R.id.edit_username);
         password = (EditText) findViewById(R.id.edit_password);
 
+
         checkBox = (CheckBox) findViewById(R.id.remember_username);
+
+        if(getPreferenceManager().isRememberUsernameEnabled()) {
+            username.setText(getPreferenceManager().getLastUsedUsername());
+            checkBox.setChecked(true);
+        }
 
         submit = (Button) findViewById(R.id.button_login);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +67,11 @@ public class LoginActivity extends DevGamesActivity {
                     return;
                 }
 
-                getPreferenceManager().setRememberPasswordEnabled(checkBox.isChecked());
+                getPreferenceManager().setRememberUsernameEnabled(checkBox.isChecked());
+                getPreferenceManager().setLastUsedUsername(
+                        getPreferenceManager().isRememberUsernameEnabled() ?
+                                usernameText : null
+                );
 
                 L.d("username and password are entered properly, starting LoginTask. rememberUsername checked={0}",
                         checkBox.isChecked());
@@ -172,8 +182,8 @@ public class LoginActivity extends DevGamesActivity {
 
         if (event.success) {
 
-            if (getPreferenceManager().isRememberPasswordEnabled()) {
-                L.v("Remember password enabled, storing in preferences...");
+            if (getPreferenceManager().isRememberUsernameEnabled()) {
+                L.v("Remember username enabled, storing in preferences...");
                 getPreferenceManager().setLastUsedUsername(username.getText().toString().trim());
             }
 

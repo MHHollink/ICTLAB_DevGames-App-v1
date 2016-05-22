@@ -14,7 +14,8 @@
 
     <color name="almond">#f1d5c5</color>
     <color name="almond_dark">#a89589</color>
-    <color name="almond_light">#f5e1d6</color>
+    <color name="almond_light">#f6ede2</color>
+    <color name="almond_light_odd_list_item">#f2e4d4</color>
 
     <color name="whiskey">#d4a772</color>
     <color name="whiskey_dark">#94744f</color>

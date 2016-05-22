@@ -1,156 +1,139 @@
 package baecon.devgames.ui.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
-import baecon.devgames.DevGamesApplication;
 import baecon.devgames.R;
-import baecon.devgames.model.Project;
-import baecon.devgames.model.ProjectUser;
+import baecon.devgames.connection.synchronization.IModelManager;
+import baecon.devgames.connection.synchronization.PushManager;
+import baecon.devgames.database.loader.ModelListLoader;
+import baecon.devgames.database.loader.PushListLoader;
+import baecon.devgames.events.BusProvider;
+import baecon.devgames.events.push.PushesUpdatedEvent;
+import baecon.devgames.model.Push;
+import baecon.devgames.ui.activity.PushDetailsActivity;
+import baecon.devgames.ui.widget.ModelListAdapter;
+import baecon.devgames.ui.widget.PushAdapter;
+import baecon.devgames.util.L;
+import baecon.devgames.util.SortOption;
 
-/**
- * Created by Marcel on 19-5-2016.
- */
-public class UserPushesFragment extends DevGamesFragment implements DevGamesTab{
+public class UserPushesFragment extends ModelListFragment<Push, Long> implements DevGamesTab{
 
-        private String title = "";
+    private String title = "";
 
-        @Nullable
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.projects_fragment, container, false);
-
-            List<Project> projects = new ArrayList<>();
-
-            Iterator<ProjectUser> itor = DevGamesApplication.get(this)
-                    .getLoggedInUser()
-                    .getProjects()
-                    .closeableIterator();
-
-            while (itor.hasNext()) {
-                projects.add( itor.next().getProject() );
-            }
-
-            ListView listView = (ListView) view.findViewById(R.id.listView);
-            listView.setAdapter(new ProjectsListAdapter(projects));
-
-            return view;
-        }
-
-        @Override
-        public String getTitle() {
-            return title;
-        }
-
-        @Override
-        public UserPushesFragment setTitle(String s) {
-            title = s;
-            return this;
-        }
-
-        @Override
-        public Fragment getFragmentFromTab() {
-            return getFragment();
-        }
-
-
-        protected class ProjectsListAdapter extends BaseAdapter {
-
-
-            private LayoutInflater inflater = null;
-
-            private List projects;
-            private Project tempValues = null;
-
-            public ProjectsListAdapter(List<Project> projects) {
-
-                setProjects(projects);
-
-                inflater = ( LayoutInflater ) getActivity().
-                        getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-            }
-
-            public void setProjects(List<Project> projects) {
-
-                this.projects = projects;
-            }
-
-            public int getCount() {
-                if(projects == null || projects.size()<=0)
-                    return 1;
-                return projects.size();
-            }
-
-            public Object getItem(int position) {
-                return position;
-            }
-
-            public long getItemId(int position) {
-                return position;
-            }
-
-            /********* Create a holder Class to contain inflated xml file elements *********/
-            private class ViewHolder{
-
-                public TextView name;
-                public TextView score;
-                public TextView description;
-                public TextView developers;
-                public TextView commits;
-            }
-
-            /****** Depends upon data size called for each row , Create each ListView row *****/
-            public View getView(int position, View convertView, ViewGroup parent) {
-
-                View view = convertView;
-                ViewHolder holder;
-
-                if( convertView == null){
-
-                    view = inflater.inflate(R.layout.project_listview_item, null);
-
-                    holder = new ViewHolder();
-                    holder.name    = (TextView) view.findViewById(R.id.project_name);
-                    holder.score = (TextView) view.findViewById(R.id.project_score);
-                    holder.description = (TextView) view.findViewById(R.id.project_description);
-                    holder.developers = (TextView) view.findViewById(R.id.project_dev_count);
-                    holder.commits = (TextView) view.findViewById(R.id.project_commit_count);
-
-                    view.setTag(holder);
-                }
-                else {
-                    holder = (ViewHolder) view.getTag();
-                }
-
-                if(projects == null || projects.size()<=0)
-                {
-                    holder.score.setText("No Data");
-                }
-                else
-                {
-                    tempValues = null;
-                    tempValues = (Project) projects.get(position);
-
-                    holder.name.setText(tempValues.getName());
-                    holder.description.setText(tempValues.getDescription());
-                    holder.developers.setText(String.valueOf(tempValues.getDevelopers().size()));
-                    holder.commits.setText(String.valueOf(tempValues.getPushes().size()));
-                    holder.score.setText(String.valueOf(0));
-                }
-                return view;
-            }
-        }
+    @Override
+    public IModelManager getSyncManager() {
+        return PushManager.get(getActivity());
     }
+
+    @Override
+    public List<SortOption<Push>> getSortOptions() {
+        ArrayList<SortOption<Push>> list = new ArrayList<>(3);
+        list.add(Push.Sort.PROJECT);
+        list.add(Push.Sort.SCORE);
+        list.add(Push.Sort.TIME);
+        return list;
+    }
+
+    @Override
+    public SortOption<Push> getCurrentSortOption() {
+        SortOption<Push> option = super.getCurrentSortOption();
+        if(option == null) {
+            option = Push.Sort.TIME;
+            setCurrentSortOption(option);
+        }
+        return option;
+    }
+
+    @Override
+    public List<FilterOption> getFilterOptions() {
+        return null;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        setEmptyText(R.string.no_pushes_available);
+
+        ListView list = getListView();
+
+        // Register for a context menu. Long clicks on an item causes onCreateContextMenu to be called
+        registerForContextMenu(list);
+    }
+
+
+    @Override
+    public void onListItemClick(Push push, View v, int position, long id) {
+        super.onListItemClick(push, v, position, id);
+
+        L.d("clicked list, push={0}", push.getId());
+
+        Intent intent = new Intent(getActivity(), PushDetailsActivity.class);
+        intent.putExtra(PushDetailsActivity.PUSH_ID, push.getId());
+        startActivity(intent);
+
+        getActivity().overridePendingTransition(R.anim.top_to_bottom_loose_focus, R.anim.top_to_bottom_gain_focus);
+    }
+
+    @Override
+    public void onSortRequest() {
+        showSortDialog();
+    }
+
+    @Override
+    public void onResume() {
+        L.d("onResume");
+        super.onResume();
+        BusProvider.getBus().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        L.d("onPause");
+        super.onPause();
+        BusProvider.getBus().unregister(this);
+    }
+
+    @Override
+    protected ModelListAdapter<Push> onCreateModelListAdapter(Context context) {
+        return new PushAdapter(context, Push.Sort.TIME);
+    }
+
+    @Override
+    public ModelListLoader<Push, Long> onCreateLoader(int i, Bundle bundle) {
+        return new PushListLoader(getActivity(), getCurrentSortOption(), getCurrentFilterOption(), getCurrentSearchQuery());
+    }
+
+
+    @Override
+    public String getTitle() {
+        return title;
+    }
+
+    @Override
+    public UserPushesFragment setTitle(String s) {
+        title = s;
+        return this;
+    }
+
+    @Override
+    public Fragment getFragmentFromTab() {
+        return getFragment();
+    }
+
+    @Subscribe
+    public void onPushUpdatedEvent(PushesUpdatedEvent event) {
+        L.d("onPushUpdatedEvent");
+        onRefreshDone();
+    }
+}

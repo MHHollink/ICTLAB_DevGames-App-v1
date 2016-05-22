@@ -111,15 +111,10 @@ public class LoginTask extends RESTTask< Void, Void, Integer> {
                 // Before clearing all settings, we need to remember whether the user wanted its
                 // username to be remembered
                 PreferenceManager pm = PreferenceManager.get(context);
-                boolean isRememberPasswordEnabled = pm.isRememberPasswordEnabled();
+                boolean isRememberPasswordEnabled = pm.isRememberUsernameEnabled();
                 String lastUsedUsername = pm.getLastUsedUsername();
 
-                PreferenceManager.clearAllSettings(context);
                 PreferenceManager.applyDefaultPreferences(context);
-
-                // Put back the remembered username
-                pm.setRememberPasswordEnabled(isRememberPasswordEnabled);
-                pm.setLastUsedUsername(lastUsedUsername);
 
                 application.setSession(session);
 

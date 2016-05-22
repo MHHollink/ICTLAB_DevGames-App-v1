@@ -27,6 +27,12 @@
         <activity
             android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ProjectDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.PushDetailsActivity"
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".connection.push.gcm.GcmBroadcastReceiver" android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>

@@ -4,8 +4,11 @@ package baecon.devgames.database.loader;
 import android.content.Context;
 
 import com.j256.ormlite.dao.Dao;
+import com.squareup.otto.Subscribe;
 
 import baecon.devgames.database.DBHelper;
+import baecon.devgames.events.projects.ProjectPushScheduledEvent;
+import baecon.devgames.events.projects.ProjectsUpdatedEvent;
 import baecon.devgames.model.Project;
 import baecon.devgames.model.update.ProjectUpdate;
 
@@ -28,4 +31,16 @@ public class ProjectLoader extends SynchronizableModelLoader<Project, ProjectUpd
     protected Dao<Project, Long> getDao(DBHelper dbHelper) {
         return null;
     }
+
+
+    @Subscribe
+    public void onUpdatedEvent(ProjectsUpdatedEvent event) {
+        checkForContentChanged(event);
+    }
+
+    @Subscribe
+    public void onEvent(ProjectPushScheduledEvent event) {
+        checkForContentChanged(event);
+    }
+
 }

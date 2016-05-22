@@ -36,9 +36,8 @@ public interface DevGamesClient {
     @GET("/users/{id}/projects")
     List<ProjectDTO> getProjectsOfUser(@Path("id") Long id);
 
-    @FormUrlEncoded
     @GET("/users/{id}/pushes")
-    List<PushDTO> getPushesOfUser(@Path("id") Long id, @Field("after") long timestamp);
+    List<PushDTO> getPushesOfUser(@Path("id") Long id);
 
     @GET("/users/{id}/commits")
     List<CommitDTO> getCommitsOfUser(@Path("id") Long id);

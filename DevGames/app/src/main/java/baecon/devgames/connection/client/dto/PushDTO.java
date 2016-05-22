@@ -1,6 +1,6 @@
 package baecon.devgames.connection.client.dto;
 
-import java.util.HashMap;
+import java.util.Set;
 
 import baecon.devgames.model.Commit;
 import baecon.devgames.model.Duplication;
@@ -15,9 +15,9 @@ public class PushDTO implements ModelDTO<Push> {
 
     private long id;
     private Project project;
-    private HashMap<Long, Commit> commits;
-    private HashMap<Long, Issue> issues;
-    private HashMap<Long, Duplication> duplications;
+    private Set<Commit> commits;
+    private Set<Issue> issues;
+    private Set<Duplication> duplications;
     private long timestamp;
     private double score;
 
@@ -30,19 +30,19 @@ public class PushDTO implements ModelDTO<Push> {
         return id;
     }
 
-    public HashMap<Long, Commit> getCommits() {
+    public Set<Commit> getCommits() {
         return commits;
     }
 
-    public void setCommits(HashMap<Long, Commit> commits) {
+    public void setCommits(Set<Commit> commits) {
         this.commits = commits;
     }
 
-    public HashMap<Long, Duplication> getDuplications() {
+    public Set<Duplication> getDuplications() {
         return duplications;
     }
 
-    public void setDuplications(HashMap<Long, Duplication> duplications) {
+    public void setDuplications(Set<Duplication> duplications) {
         this.duplications = duplications;
     }
 
@@ -50,11 +50,11 @@ public class PushDTO implements ModelDTO<Push> {
         this.id = id;
     }
 
-    public HashMap<Long, Issue> getIssues() {
+    public Set<Issue> getIssues() {
         return issues;
     }
 
-    public void setIssues(HashMap<Long, Issue> issues) {
+    public void setIssues(Set<Issue> issues) {
         this.issues = issues;
     }
 
@@ -90,7 +90,7 @@ public class PushDTO implements ModelDTO<Push> {
         push.setScore(score);
         push.setTimestamp(timestamp);
 
-        return null;
+        return push;
     } // TODO: 09-5-2016
 
     @Override

@@ -4,6 +4,34 @@
     xmlns:support="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_btn_search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_search"
+        support:showAsAction="ifRoom|collapseActionView"
+        />
+
+    <item
+        android:id="@+id/menu_btn_refresh"
+        android:title="@string/refresh"
+        android:icon="@drawable/ic_refresh"
+        support:showAsAction="ifRoom|collapseActionView"
+        />
+
+    <item
+        android:id="@+id/menu_btn_sort"
+        android:title="@string/sort"
+        android:icon="@drawable/ic_sort"
+        support:showAsAction="never|collapseActionView"
+        />
+
+    <item
+        android:id="@+id/menu_btn_filter"
+        android:title="@string/filter"
+        android:icon="@drawable/ic_filter"
+        support:showAsAction="never|collapseActionView"
+        />
+
+    <item
         android:id="@+id/menu_btn_settings"
         android:title="@string/settings"
         support:showAsAction="never|collapseActionView"

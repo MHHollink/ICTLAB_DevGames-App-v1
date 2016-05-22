@@ -70,7 +70,7 @@ import static baecon.devgames.ui.fragment.DevGamesTab.OnSortActionListener;
  *         The type of the ID column of the {@link Model}
  */
 public abstract class ModelListFragment<Model, Id>
-        extends Fragment
+        extends DevGamesFragment
         implements LoaderManager.LoaderCallbacks<List<Model>>, OnRefreshRequestListener, OnSearchActionListener,
         OnSortActionListener, OnFilterRequestListener, OnAddActionListener, SwipeRefreshLayout.OnRefreshListener {
 
@@ -177,9 +177,9 @@ public abstract class ModelListFragment<Model, Id>
 
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setColorSchemeResources(
-                R.color.cornflower,
-                R.color.seance,
-                R.color.electric
+                R.color.mineral,
+                R.color.almond,
+                R.color.whiskey
         );
 
         // Create the adapter

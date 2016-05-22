@@ -43,8 +43,6 @@ public class UserUpdate extends AbsModelUpdate<User> {
         Response response;
 
         switch (getOperation()) {
-            case CREATE:
-                throw new RuntimeException("Not implemented");
 
             case UPDATE:
 
@@ -55,9 +53,10 @@ public class UserUpdate extends AbsModelUpdate<User> {
 
                 break;
 
+            case CREATE:
+                // Fall trough allowed
             case UPDATE_FIELD:
-                throw new RuntimeException("Not implemented");
-
+                // Fall trough allowed
             case DELETE:
                 throw new RuntimeException("Not implemented");
 

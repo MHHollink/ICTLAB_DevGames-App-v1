@@ -34,19 +34,23 @@ public class PreferenceManager {
      * @param context the context of the application that uses the method
      */
     public static void applyDefaultPreferences(Context context) {
+        L.d("*");
+        PreferenceManager preferenceManager = get(context);
+
+        String lastUsedUsername = preferenceManager
+                .isRememberUsernameEnabled() ?
+                    preferenceManager.getLastUsedUsername() :
+                    null;
+
 
         clearAllSettings(context);
 
-        PreferenceManager preferenceManager = get(context);
-
-        preferenceManager.setLastUsedUsername(null);
-        preferenceManager.setRememberPasswordEnabled(false);
+        preferenceManager.setLastUsedUsername(lastUsedUsername);
+        preferenceManager.setRememberUsernameEnabled(lastUsedUsername != null);
         preferenceManager.setNotificationRingtone(null);
         preferenceManager.setNotificationsEnabled(true);
         preferenceManager.setNotificationVibrationEnabled(true);
         preferenceManager.setShowPlayServicesDialog(true);
-
-
     }
 
     /**
@@ -94,17 +98,17 @@ public class PreferenceManager {
      * Boolean value. Whether the username should be saved when a login request succeeds. The password should never be
      * saved. Default false.
      *
-     * @see #isRememberPasswordEnabled()
+     * @see #isRememberUsernameEnabled()
      */
-    public static final String PREF_REMEMBER_PASSWORD_ENABLED = "pref_remember_password_enabled";
+    public static final String PREF_REMEMBER_USERNAME_ENABLED = "pref_remember_username_enabled";
 
     /**
      * Returns whether the username should be saved when a login request succeeds.
      *
      * @return whether the username should be saved when a login request succeeds.
      */
-    public boolean isRememberPasswordEnabled() {
-        return sharedPreferences.getBoolean(PREF_REMEMBER_PASSWORD_ENABLED, false);
+    public boolean isRememberUsernameEnabled() {
+        return sharedPreferences.getBoolean(PREF_REMEMBER_USERNAME_ENABLED, false);
     }
 
     /**
@@ -113,8 +117,9 @@ public class PreferenceManager {
      * @param enabled
      *         whether the the username should be saved when a login request succeeds
      */
-    public void setRememberPasswordEnabled(boolean enabled) {
-        putBoolean(PREF_REMEMBER_PASSWORD_ENABLED, enabled);
+    public void setRememberUsernameEnabled(boolean enabled) {
+        L.d("{0}",enabled);
+        putBoolean(PREF_REMEMBER_USERNAME_ENABLED, enabled);
     }
 
     /**
@@ -149,6 +154,7 @@ public class PreferenceManager {
      * @see #removeLastUsedUsername()
      */
     public void setLastUsedUsername(String lastUsedUsername) {
+        L.d("{0}",lastUsedUsername);
         putString(PREF_LAST_USED_USERNAME, lastUsedUsername);
     }
 
@@ -178,6 +184,7 @@ public class PreferenceManager {
      * @param notificationsEnabled Set whether notifications should be enabled in the whole app. This is a user setting.
      */
     public void setNotificationsEnabled(boolean notificationsEnabled) {
+        L.d("{0}",notificationsEnabled);
         putBoolean(PREF_KEY_NOTIFICATIONS_ENABLED, notificationsEnabled);
     }
 
@@ -198,6 +205,7 @@ public class PreferenceManager {
      * @param notificationRingtone The URI of the sound that should be used with a notification. This is a user setting.
      */
     public void setNotificationRingtone(String notificationRingtone) {
+        L.d("{0}",notificationRingtone);
         putString(PREF_KEY_NOTIFICATION_SOUND, notificationRingtone);
     }
 
@@ -217,6 +225,7 @@ public class PreferenceManager {
      * @param notificationVibrationEnabled Set whether the device should vibrate when a notification is fired. This is a user setting.
      */
     public void setNotificationVibrationEnabled(boolean notificationVibrationEnabled) {
+        L.d("{0}",notificationVibrationEnabled);
         putBoolean(PREF_KEY_NOTIFICATION_VIBRATE, notificationVibrationEnabled);
     }
 
@@ -244,6 +253,7 @@ public class PreferenceManager {
      *                              is called
      */
     public void setShowPlayServicesDialog(boolean shouldBeShownNextTime) {
+        L.d("{0}",shouldBeShownNextTime);
         putBoolean(PREF_KEY_SHOW_PLAY_SERVICES_DIALOG, shouldBeShownNextTime);
     }
 

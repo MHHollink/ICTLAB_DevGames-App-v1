@@ -19,6 +19,7 @@ import retrofit.client.Response;
 public class CommitUpdate extends AbsModelUpdate<Commit> {
 
     public CommitUpdate() {
+        // Empty constructor for ORMLite
     }
 
     public CommitUpdate(Commit commit) {
@@ -40,6 +41,6 @@ public class CommitUpdate extends AbsModelUpdate<Commit> {
 
     @Override
     public Response sync(Context context, DBHelper dbHelper, DevGamesClient client) throws Exception {
-        return null; // todo
+        throw new RuntimeException("Not implemented");
     }
 }

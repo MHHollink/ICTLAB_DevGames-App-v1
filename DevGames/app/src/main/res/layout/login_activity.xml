@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/cornflower">
+    android:background="@color/highland">
 
     <LinearLayout
         android:orientation="vertical"
@@ -42,9 +42,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:textColor="@color/cornflower"
-                    android:textColorHint="@color/cornflower_light"
-                    android:backgroundTint="@color/cornflower"
+                    android:textColor="@color/highland"
+                    android:textColorHint="@color/highland_light"
+                    android:backgroundTint="@color/highland"
                     android:imeOptions="actionNext"
                     android:hint="@string/username" />
 
@@ -54,9 +54,9 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="15dp"
-                    android:textColor="@color/cornflower"
-                    android:textColorHint="@color/cornflower_light"
-                    android:backgroundTint="@color/cornflower"
+                    android:textColor="@color/highland"
+                    android:textColorHint="@color/highland_light"
+                    android:backgroundTint="@color/highland"
                     android:imeActionLabel="@string/login"
                     android:imeActionId="1234"
                     android:hint="@string/password" />
@@ -66,8 +66,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/remember"
-                    android:buttonTint="@color/cornflower"
-                    android:textColor="@color/cornflower"
+                    android:buttonTint="@color/highland"
+                    android:textColor="@color/highland"
                     android:layout_marginBottom="15dp" />
 
                 <Button
@@ -75,7 +75,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/login"
-                    android:background="@color/cornflower"
+                    android:background="@color/highland"
                     android:minHeight="40dp" />
 
             </LinearLayout>
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:background="@color/cornflower_light"
+                android:background="@color/highland_light"
                 android:padding="16dp"
                 android:orientation="horizontal">
 
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:gravity="center_vertical"
-                android:drawableStart="@drawable/ic_action_accept"
+                android:drawableStart="@drawable/ic_accept"
                 android:text="@string/login_200"
                 android:textColor="@color/white"
                 android:paddingLeft="16dp"
@@ -129,7 +129,7 @@
               android:layout_height="wrap_content"
               android:layout_margin="8dp"
               android:gravity="center_horizontal"
-              android:textColor="@color/tu_java_light"
+              android:textColor="@color/highland_light"
               />-->
 
         <TextView
@@ -138,7 +138,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:gravity="center_horizontal"
-            android:textColor="@color/cornflower_light"
+            android:textColor="@color/highland_light"
             />
 
     </LinearLayout>

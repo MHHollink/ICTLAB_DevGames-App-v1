@@ -19,6 +19,7 @@ import retrofit.client.Response;
 public class ProjectUpdate extends AbsModelUpdate<Project> {
 
     public ProjectUpdate() {
+        // Empty constructor for ORMLite
     }
 
     public ProjectUpdate(Project project) {
@@ -40,6 +41,6 @@ public class ProjectUpdate extends AbsModelUpdate<Project> {
 
     @Override
     public Response sync(Context context, DBHelper dbHelper, DevGamesClient client) throws Exception {
-        return null;
+        throw new RuntimeException("Not implemented");
     }
 }

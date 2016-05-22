@@ -36,8 +36,6 @@ import retrofit.client.Response;
  * </li>
  * </ol>
  * </p>
- *
- * TODO: assumptions about a model having a .getGeneratedId()
  */
 public interface IModelUpdate<Model extends ISynchronizable> {
 

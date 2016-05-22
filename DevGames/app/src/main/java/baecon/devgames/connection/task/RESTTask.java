@@ -2,7 +2,6 @@ package baecon.devgames.connection.task;
 
 
 import android.content.Context;
-import android.content.Intent;
 
 import java.sql.SQLException;
 
@@ -12,9 +11,9 @@ import baecon.devgames.database.DBHelper;
 import baecon.devgames.model.ISynchronizable;
 import baecon.devgames.model.Setting;
 import baecon.devgames.model.User;
-import baecon.devgames.ui.activity.LoginActivity;
 import baecon.devgames.util.L;
 import baecon.devgames.util.MultiThreadedAsyncTask;
+import baecon.devgames.util.PreferenceManager;
 import retrofit.RetrofitError;
 
 /**
@@ -109,13 +108,6 @@ public abstract class RESTTask<P, I, R> extends MultiThreadedAsyncTask<P, I, R> 
      * @return the HTTP status of a RetrofitError.
      */
     public int getStatus(RetrofitError error) {
-
-        // TODO fix this hack!
-        if (error != null && error.getMessage() != null &&
-                error.getMessage().contains("authentication challenge is null")) {
-            return UNAUTHORIZED;
-        }
-
         if (error == null || error.getResponse() == null) {
             return GENERAL_CONNECTION_ERROR;
         }
@@ -124,13 +116,13 @@ public abstract class RESTTask<P, I, R> extends MultiThreadedAsyncTask<P, I, R> 
     }
 
     public void requestReLogin() {
-        Intent intent = new Intent(context, LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        context.startActivity(intent);
+        new LogoutTask(context, false).executeThreaded();
+        PreferenceManager.applyDefaultPreferences(context);
+        DevGamesApplication.get(context).setLoggedInUser(null);
     }
 
     /**
-     * Returns the {@link DevGamesApplication}.
+     * Returns the {@link DevGamesApplication}.p
      *
      * @return The {@link DevGamesApplication}.
      */

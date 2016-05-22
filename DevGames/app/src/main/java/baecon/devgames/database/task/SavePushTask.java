@@ -6,7 +6,7 @@ import com.j256.ormlite.dao.Dao;
 
 import java.io.Serializable;
 
-import baecon.devgames.connection.synchronization.ProjectManager;
+import baecon.devgames.connection.synchronization.PushManager;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.database.modelupdate.Operation;
 import baecon.devgames.events.BusProvider;
@@ -48,11 +48,11 @@ public class SavePushTask extends ModelCUDTask<Push, PushUpdate>{
         L.v("{0}", result);
 
         if (getModelUpdate() != null && result != null) {
-            ProjectManager.get(context).offerUpdate(getModelUpdate());
+            PushManager.get(context).offerUpdate(getModelUpdate());
             BusProvider.getBus().post(new PushPushScheduledEvent(getModelUpdate(), result == UPDATED));
         }
         else {
-            L.w("PushUpdate not scheduled! Project was null or a local database error occurred");
+            L.w("PushUpdate not scheduled! Push was null or a local database error occurred");
         }
     }
 }

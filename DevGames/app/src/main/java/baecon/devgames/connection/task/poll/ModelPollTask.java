@@ -159,7 +159,7 @@ public abstract class ModelPollTask
         }
 
         HashMap<Long, Model> fromDb;
-        HashMap<Long, ModelDTOClass> fromBackend = new HashMap<Long, ModelDTOClass>(Utils.count(dtoFromBackend));
+        HashMap<Long, ModelDTOClass> fromBackend = new HashMap<>(Utils.count(dtoFromBackend));
 
         if (Utils.isNotEmpty(dtoFromBackend)) {
             for (ModelDTOClass dto : dtoFromBackend) {

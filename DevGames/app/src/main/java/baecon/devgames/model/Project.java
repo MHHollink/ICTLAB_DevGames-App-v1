@@ -7,11 +7,63 @@ import com.j256.ormlite.field.ForeignCollectionField;
 import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
+import baecon.devgames.R;
 import baecon.devgames.database.DBHelper;
+import baecon.devgames.util.HeaderFactory;
+import baecon.devgames.util.ProjectNameComparator;
+import baecon.devgames.util.ProjectScoreComparator;
+import baecon.devgames.util.SortOption;
 
 @DatabaseTable(tableName = DBHelper.Tables.PROJECTS)
 public class Project extends AbsSynchronizable implements Serializable {
+
+    public enum Sort implements SortOption<Project> {
+        NAME(R.string.sort_name, new ProjectNameComparator()),
+        SCORE(R.string.sort_score, new ProjectScoreComparator());
+
+        public final int i18nFilterName;
+        public final Comparator<Project> comparator;
+
+
+        Sort(int i18nFilterName, Comparator<Project> comparator) {
+            this.i18nFilterName = i18nFilterName;
+            this.comparator = comparator;
+        }
+
+        /**
+         * Returns the {@link Sort} that this name represents. Returns null if not found.
+         *
+         * @param name
+         *         The {@link #name()} of one of the elements in this enum
+         *
+         * @return The {@link Sort} that this name represents, or null if non found
+         */
+        public static Sort tryValueOf(String name) {
+            try {
+                return valueOf(name);
+            }
+            catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
+
+        @Override
+        public int getI18nTitleResId() {
+            return i18nFilterName;
+        }
+
+        @Override
+        public Comparator<Project> getComparator() {
+            return comparator;
+        }
+
+        @Override
+        public HeaderFactory<Project> getHeaderFactory() {
+            return null;
+        }
+    }
 
     public static class Column {
         public static final String OWNER = "owner";

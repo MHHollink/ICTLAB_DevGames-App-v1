@@ -20,9 +20,9 @@ import baecon.devgames.model.update.ProjectUpdate;
 import baecon.devgames.util.L;
 
 public class PollProjectTask extends ModelPollTask<Project, ProjectUpdate, ProjectDTO>{
+
     private Long userId;
     private Dao<User, Long> userDao;
-
 
     /**
      * Creates a PollProjectsTask that will poll for <strong>ALL projects of ALL users</strong>. This is a very heavy
@@ -31,9 +31,14 @@ public class PollProjectTask extends ModelPollTask<Project, ProjectUpdate, Proje
      * @param context Context to access network and database
      */
     public PollProjectTask(Context context) {
-        super(context, null);
+        this(context, null);
     }
 
+    /**
+     *
+     * @param context
+     * @param userId
+     */
     public PollProjectTask(Context context, Long userId) {
         super(context, ProjectManager.get(context));
         this.userId = userId;
@@ -92,11 +97,11 @@ public class PollProjectTask extends ModelPollTask<Project, ProjectUpdate, Proje
 
     @Override
     protected Dao<Project, Long> getModelDao() {
-        return DBHelper.getProjectDao(getDbHelper()); // TODO: 09-5-2016
+        return DBHelper.getProjectDao(getDbHelper());
     }
 
     @Override
     protected Dao<ProjectUpdate, Long> getModelUpdateDao() {
-        return DBHelper.getProjectUpdateDao(getDbHelper()); // TODO: 09-5-2016
+        return DBHelper.getProjectUpdateDao(getDbHelper());
     }
 }

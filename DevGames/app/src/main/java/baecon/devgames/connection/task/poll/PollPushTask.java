@@ -13,7 +13,7 @@ import baecon.devgames.connection.client.DevGamesClient;
 import baecon.devgames.connection.client.dto.PushDTO;
 import baecon.devgames.connection.synchronization.PushManager;
 import baecon.devgames.database.DBHelper;
-import baecon.devgames.events.projects.ProjectsUpdatedEvent;
+import baecon.devgames.events.push.PushesUpdatedEvent;
 import baecon.devgames.model.Push;
 import baecon.devgames.model.User;
 import baecon.devgames.model.update.PushUpdate;
@@ -31,7 +31,7 @@ public class PollPushTask extends ModelPollTask<Push, PushUpdate, PushDTO>{
      * @param context Context to access network and database
      */
     public PollPushTask(Context context) {
-        super(context, null);
+        this(context, null);
     }
 
     public PollPushTask(Context context, Long userId) {
@@ -43,18 +43,18 @@ public class PollPushTask extends ModelPollTask<Push, PushUpdate, PushDTO>{
     }
 
     @Override
-    protected ProjectsUpdatedEvent getUpdatedEvent(Integer result,
+    protected PushesUpdatedEvent getUpdatedEvent(Integer result,
                                                    HashSet<Long> removed,
                                                    HashSet<Long> added,
                                                    HashSet<Long> updated)
     {
-        return new ProjectsUpdatedEvent(result, removed, added, updated);
+        return new PushesUpdatedEvent(result, removed, added, updated);
     }
 
     @Override
     protected List<PushDTO> doPoll(DevGamesClient client) throws SQLException {
-        List<User> users = null;
         List<PushDTO> pushDTOs = new ArrayList<>();
+        List<User> users = null;
 
         try {
             if (userId != null) {
@@ -74,20 +74,23 @@ public class PollPushTask extends ModelPollTask<Push, PushUpdate, PushDTO>{
         if (users != null) {
             for (User u : users) {
 
+                // The latest push that is local will be used for timestamp.
+                // We only want to retrieve the latest pair of pushes
+                // Pushes never change, so why get all pushes - every time
                 Push push = pushDao.queryBuilder()
                         .orderBy(Push.Column.TIMESTAMP, false)
                         .where()
                         .eq(Push.Column.PUSHER, u)
                         .queryForFirst();
 
-                List<PushDTO> temp = client.getPushesOfUser(u.getId(), push.getTimestamp());
+                List<PushDTO> temp = client.getPushesOfUser(u.getId());
 
                 if (temp != null) {
                     pushDTOs.addAll(temp);
                 }
             }
         } else {
-            L.w("Got 0 users! Cannot retrieve projects");
+            L.w("Got 0 users! Cannot retrieve pushes");
         }
 
         return pushDTOs;
@@ -100,11 +103,11 @@ public class PollPushTask extends ModelPollTask<Push, PushUpdate, PushDTO>{
 
     @Override
     protected Dao<Push, Long> getModelDao() {
-        return DBHelper.getPushDao(getDbHelper()); // TODO: 09-5-2016
+        return DBHelper.getPushDao(getDbHelper());
     }
 
     @Override
     protected Dao<PushUpdate, Long> getModelUpdateDao() {
-        return DBHelper.getPushUpdateDao(getDbHelper()); // TODO: 09-5-2016
+        return DBHelper.getPushUpdateDao(getDbHelper());
     }
 }

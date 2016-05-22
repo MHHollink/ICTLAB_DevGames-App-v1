@@ -100,11 +100,6 @@ public class UserManager extends AbsModelManager<User, UserDTO, UserUpdate, User
     }
 
     @Override
-    public boolean isInForegroundSyncMode() {
-        return true;
-    }
-
-    @Override
     public void create(User user) {
         new SaveUserTask(getApplication(), Operation.CREATE, user).executeThreaded();
     }

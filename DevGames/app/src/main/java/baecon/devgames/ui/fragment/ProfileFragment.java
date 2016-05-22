@@ -90,7 +90,7 @@ public class ProfileFragment extends DevGamesFragment implements DevGamesTab {
         BusProvider.getBus().register(this);
 
         // Start loading the data
-        startOrRefreshClientLoader(initialUserId);
+        startOrRefreshUserLoader(initialUserId);
         updateUI();
     }
 
@@ -106,7 +106,7 @@ public class ProfileFragment extends DevGamesFragment implements DevGamesTab {
      *
      * @param localUserId The local id of the client
      */
-    private void startOrRefreshClientLoader(Long localUserId) {
+    private void startOrRefreshUserLoader(Long localUserId) {
 
         L.v("Called");
 
@@ -118,7 +118,7 @@ public class ProfileFragment extends DevGamesFragment implements DevGamesTab {
 
 
     /**
-     * Callbacks used for the client loader
+     * Callbacks used for the user loader
      */
     private LoaderManager.LoaderCallbacks<User> userLoaderCallbacks = new LoaderManager.LoaderCallbacks<User>() {
 

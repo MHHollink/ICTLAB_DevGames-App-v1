@@ -19,6 +19,7 @@ import retrofit.client.Response;
 public class DuplicationUpdate extends AbsModelUpdate<Duplication> {
 
     public DuplicationUpdate() {
+        // Empty constructor for ORMLite
     }
 
     public DuplicationUpdate(Duplication duplication) {
@@ -40,6 +41,6 @@ public class DuplicationUpdate extends AbsModelUpdate<Duplication> {
 
     @Override
     public Response sync(Context context, DBHelper dbHelper, DevGamesClient client) throws Exception {
-        return null; // todo
+        throw new RuntimeException("Not implemented");
     }
 }

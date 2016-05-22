@@ -6,27 +6,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import baecon.devgames.util.Header;
+import java.util.Collections;
+import java.util.List;
+
+import baecon.devgames.database.loader.ModelListLoader;
+import baecon.devgames.ui.fragment.ModelListFragment;
 import baecon.devgames.util.HeaderFactory;
 import baecon.devgames.util.L;
 import baecon.devgames.util.SortOption;
 
-import java.util.Collections;
-import java.util.List;
-
 /**
  * An ArrayAdapter that takes care of binding the data from the {@link ModelClass} to a view. Use
- * {@link #setData(List, com.askcs.teamup.util.SortOption)} to set new data.
+ * {@link #setData(List, SortOption)} to set new data.
  * <p>
  * Use with:
  * <ul>
- * <li>{@link com.askcs.teamup.ui.fragment.ModelListFragment}</li>
- * <li>{@link com.askcs.teamup.database.loader.ModelListLoader}</li>
+ * <li>{@link ModelListFragment}</li>
+ * <li>{@link ModelListLoader}</li>
  * </ul>
  * </p>
  *
- * A ListAdapter that is able to display headers in a list, based on the {@link com.askcs.teamup.util.SortOption}.
- * Override {@link #calculateHeaderNeed(int, Object, Object)} and call {@link #needsHeader(int)} in {@link #getView(int,
+ * A ListAdapter that is able to display headers in a list, based on the {@link SortOption}.
+ * Override {@link HeaderFactory#needsHeader(Object, Object)} and call {@link #needsHeader(int)} in {@link #getView(int,
  * View, ViewGroup)} to know whether a header should be displayed. This class assumes you have some header layout in
  * each entry (see <a href="http://cyrilmottier.com/2011/07/05/listview-tips-tricks-2-section-your-listview/">http://cyrilmottier.com/2011/07/05/listview-tips-tricks-2-section-your-listview/</a>).
  *
@@ -108,7 +109,7 @@ public abstract class ModelListAdapter<ModelClass> extends ArrayAdapter<ModelCla
 
     /**
      * Returns whether an item in the list should display a header. If the cache does not contain an entry for the item at
-     * this position, {@link Header#calculateHeaderNeed(int, ModelClass, ModelClass)} is called. That is automatically saved in
+     * this position, {@link HeaderFactory#needsHeader(ModelClass, ModelClass)} is called. That is automatically saved in
      * the cache.
      *
      * @param position

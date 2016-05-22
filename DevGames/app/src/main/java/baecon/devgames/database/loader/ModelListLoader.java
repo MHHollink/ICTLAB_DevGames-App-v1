@@ -13,6 +13,7 @@ import java.util.List;
 import baecon.devgames.DevGamesApplication;
 import baecon.devgames.database.DBHelper;
 import baecon.devgames.ui.fragment.ModelListFragment;
+import baecon.devgames.ui.widget.ModelListAdapter;
 import baecon.devgames.util.L;
 import baecon.devgames.util.SortOption;
 
