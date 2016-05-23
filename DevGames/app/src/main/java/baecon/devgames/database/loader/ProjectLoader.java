@@ -24,12 +24,12 @@ public class ProjectLoader extends SynchronizableModelLoader<Project, ProjectUpd
 
     @Override
     protected Dao<ProjectUpdate, Long> getUpdateDao(DBHelper dbHelper) {
-        return null;
+        return DBHelper.getProjectUpdateDao(getDbHelper());
     }
 
     @Override
     protected Dao<Project, Long> getDao(DBHelper dbHelper) {
-        return null;
+        return DBHelper.getProjectDao(getDbHelper());
     }
 
 

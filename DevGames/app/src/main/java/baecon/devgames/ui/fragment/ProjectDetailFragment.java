@@ -44,7 +44,7 @@ public class ProjectDetailFragment extends DevGamesFragment implements DevGamesT
     }
 
     @Override
-    public DevGamesTab setTitle(String s) {
+    public ProjectDetailFragment setTitle(String s) {
         title = s;
         return this;
     }

@@ -47,20 +47,14 @@ public class ProjectsAdapter extends ModelListAdapter<Project> {
         // Apply different colors to odd and even rows
         if (position % 2 == 1) {
             view.setBackgroundResource(R.drawable.list_entry_almond_even);
-
-            // The rounded corners of the avatar should have the same color as the whole list entry
-            // TODO: apply other possible states
             holder.avatar.setBackgroundColor(avatarBackgroundColorOdd);
         }
         else {
             view.setBackgroundResource(R.drawable.list_entry_almond_odd);
-
-            // The rounded corners of the avatar should have the same color as the whole list entry
-            // TODO: apply other possible states
             holder.avatar.setBackgroundColor(avatarBackgroundColorEven);
         }
 
-        // If the client is null, use ugly default values
+        // If the project is null, use ugly default values
         if (project == null) {
             L.w("Project is null at position {0}! Using default values.", position);
             holder.txtName.setText("");

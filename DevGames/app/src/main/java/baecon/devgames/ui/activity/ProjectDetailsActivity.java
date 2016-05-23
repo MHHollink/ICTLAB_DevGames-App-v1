@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import java.util.Stack;
 
 import baecon.devgames.R;
-import baecon.devgames.ui.fragment.PushDetailFragment;
+import baecon.devgames.ui.fragment.ProjectDetailFragment;
 import baecon.devgames.ui.widget.SlidingTabLayout;
 import baecon.devgames.util.L;
 import baecon.devgames.util.ViewPageAdapter;
@@ -23,6 +23,7 @@ import baecon.devgames.util.ViewPageAdapter;
 public class ProjectDetailsActivity extends DevGamesActivity {
 
     public static final String PROJECT_ID = "project_id";
+    public long projectId;
 
     public static final boolean[] showSearchInActionBar  = new boolean[]{false, false};
     public static final boolean[] showSortInActionBar    = new boolean[]{false,  true};
@@ -72,20 +73,22 @@ public class ProjectDetailsActivity extends DevGamesActivity {
         if (!isLoggedIn())
             return; // If user is not logged in, stop running the onCreate to avoid exceptions
 
+        projectId = getIntent().getLongExtra(PROJECT_ID, 0L);
+        if(projectId == 0) throw new RuntimeException("Project id was 0, this should not be possible!");
+
         setContentView(R.layout.main_activity);
 
         adapter = new ViewPageAdapter(getSupportFragmentManager());
 
-        PushDetailFragment pushDetailFragment = new PushDetailFragment()
-                .setTitle("Push information");
+        ProjectDetailFragment projectDetailsActivity = new ProjectDetailFragment()
+                .setTitle(getString(R.string.project));
         Bundle bundle = new Bundle(1);
-        long projectId = getIntent().getLongExtra(PROJECT_ID, 0L);
-        if(projectId == 0) throw new RuntimeException("Project id was 0, this should not be possible!");
         bundle.putLong(PROJECT_ID, projectId);
+        projectDetailsActivity.setArguments(bundle);
 
         // Add pages to the viewpager
         adapter.addTab(
-                pushDetailFragment
+                projectDetailsActivity
         );
 
         // Add the index of the first fragment to the stack.
@@ -199,7 +202,7 @@ public class ProjectDetailsActivity extends DevGamesActivity {
 
         Fragment lastFragment = (Fragment) adapter.instantiateItem(pager, pager.getCurrentItem());
 
-        return false;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
