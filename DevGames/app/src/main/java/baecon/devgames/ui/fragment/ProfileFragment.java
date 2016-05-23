@@ -27,7 +27,7 @@ public class ProfileFragment extends DevGamesFragment implements DevGamesTab {
     private String title = "";
 
     public static final String USER_LOCAL_ID = "user_local_id";
-    public static final int USER_LOAD_ID = 1;
+    public static final int USER_LOADER_ID = 1;
 
     @Override
     public Fragment getFragmentFromTab() {
@@ -113,7 +113,7 @@ public class ProfileFragment extends DevGamesFragment implements DevGamesTab {
         Bundle args = new Bundle(1);
         args.putLong(USER_LOCAL_ID, localUserId);
 
-        getLoaderManager().restartLoader(USER_LOAD_ID, args, userLoaderCallbacks);
+        getLoaderManager().restartLoader(USER_LOADER_ID, args, userLoaderCallbacks);
     }
 
 

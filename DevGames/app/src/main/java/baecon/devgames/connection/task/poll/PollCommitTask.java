@@ -40,6 +40,9 @@ public class PollCommitTask extends ModelPollTask<Commit, CommitUpdate, CommitDT
     public PollCommitTask(Context context, Long userId) {
         super(context, CommitManager.get(context));
         this.userId = userId;
+
+        userDao = DBHelper.getUserDao(getDbHelper());
+        pushDao = DBHelper.getPushDao(getDbHelper());
     }
 
     @Override

@@ -15,9 +15,9 @@
     <string name="blocking_error_unknown_with_status_code_known">Error: unknown. \nStatus code: %1$s</string>
     <string name="blocking_error_unknown_with_status_code_unknown">Error: unknown. \nStatus code: unknown (0).</string>
 
-    <string name="date_HH_mm">HH_mm</string>
-    <string name="date_dd_MM_yyyy">dd_MM_yyyy</string>
-    <string name="date_dd_MMM_HH_mm">dd_MMM_HH_mm</string>
+    <string name="date_HH_mm">HH mm</string>
+    <string name="date_dd_MM_yyyy">dd MM yyyy</string>
+    <string name="date_dd_MMM_HH_mm">dd MMM HH:mm</string>
 
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -61,6 +61,7 @@
     <string name="issues">issues</string>
     <string name="project">projects</string>
     <string name="pushes">pushes</string>
+    <string name="push_details">push details</string>
     <string name="commits">commits</string>
     <string name="score">points</string>
     <string name="list_view_explanation">developers with a total of</string>
@@ -74,6 +75,7 @@
     <string name="sort">sort</string>
     <string name="duplications">duplications</string>
     <string name="no_name_available">No name available</string>
+    <string name="developers">developers</string>
 
 
 </resources>

@@ -88,8 +88,10 @@ public class MainActivity extends DevGamesActivity implements SearchView.OnQuery
         adapter = new ViewPageAdapter(getSupportFragmentManager());
 
         // Create Profile TAB
-        ProfileFragment profile = new ProfileFragment();
-        profile.setTitle(DevGamesApplication.get(this).getString(R.string.profile));
+        ProfileFragment profile = new ProfileFragment()
+                .setTitle(
+                        DevGamesApplication.get(this).getString(R.string.profile)
+                );
         Bundle args = new Bundle(1);
         args.putLong(
                 ProfileFragment.USER_LOCAL_ID,
@@ -98,16 +100,18 @@ public class MainActivity extends DevGamesActivity implements SearchView.OnQuery
         profile.getFragment().setArguments(args);
 
         // Create Projects Tab
-        ProjectsFragment projects = new ProjectsFragment();
-        projects.setTitle(DevGamesApplication.get(this).getString(R.string.project));
+        ProjectsFragment projects = new ProjectsFragment()
+                .setTitle(DevGamesApplication.get(this).getString(R.string.project));
 
         // Create Pushes Tab
-        UserPushesFragment pushes = new UserPushesFragment();
-        pushes.setTitle(DevGamesApplication.get(this).getString(R.string.pushes));
+        UserPushesFragment pushes = new UserPushesFragment()
+                .setTitle(DevGamesApplication.get(this).getString(R.string.pushes));
 
         // Add pages to the viewpager
         adapter.addTab(
-                profile, projects, pushes // TODO: 17-5-2016 more tabs
+                profile,
+                projects,
+                pushes
         );
 
         // Add the index of the first fragment to the stack.

@@ -54,17 +54,11 @@ public class PushAdapter extends ModelListAdapter<Push> {
         }
         else {
 
-            try {
-                holder.txtName.setText(
-                        push.getCommits()
-                                .iterator()
-                                .next()
-                                .getTitle()
-                );
-            } catch (IndexOutOfBoundsException e) {
-                // Iterator.next without check might throw IndexOutOfBoundsException
-                holder.txtName.setText(R.string.no_name_available);
-            }
+            holder.txtName.setText(
+                    push.getCommits() != null && push.getCommits().size() != 0 ?
+                            push.getCommits().iterator().next().getTitle()
+                            : getContext().getString(R.string.no_name_available)
+            );
 
 //            holder.txtScore.setText(
 //                    String.valueOf(push.getScore())

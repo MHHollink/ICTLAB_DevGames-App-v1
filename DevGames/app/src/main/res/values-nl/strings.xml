@@ -15,9 +15,9 @@
     <string name="blocking_error_unknown_with_status_code_known">Fout: onbekend. \nStatus code: %1$s</string>
     <string name="blocking_error_unknown_with_status_code_unknown">Fout: onbekend. \nStatus code: onbekend (0).</string>
 
-    <string name="date_HH_mm">HH_mm</string>
-    <string name="date_dd_MM_yyyy">dd_MM_yyyy</string>
-    <string name="date_dd_MMM_HH_mm">dd_MMM_HH_mm</string>
+    <string name="date_HH_mm">HH mm</string>
+    <string name="date_dd_MM_yyyy">dd MM yyyy</string>
+    <string name="date_dd_MMM_HH_mm">dd MMM HH:mm</string>
 
     <string name="ok">OK</string>
     <string name="cancel">anuleren</string>
@@ -61,6 +61,7 @@
     <string name="issues">problemen</string>
     <string name="project">projecten</string>
     <string name="pushes">pushes</string>
+    <string name="push_details">push informatie</string>
     <string name="commits">commits</string>
     <string name="score">punten</string>
     <string name="list_view_explanation">developers met een totaal van</string>
@@ -74,5 +75,6 @@
     <string name="sort">Sorteren</string>
     <string name="duplications">Duplicaten</string>
     <string name="no_name_available">Naam niet beschikbaar</string>
+    <string name="developers">ontwikkelaars</string>
 
 </resources>
