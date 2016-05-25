@@ -67,7 +67,7 @@ public class ProjectsAdapter extends ModelListAdapter<Project> {
 
             // Full name of the client
             holder.txtName.setText(project.getName());
-            holder.txtScore.setText(String.valueOf(project.getScore()));
+            holder.txtScore.setText(String.valueOf(0));
             holder.txtDevelopers.setText(
                     project.getDevelopers() != null ? String.valueOf( project.getDevelopers().size()) : "?"
             );

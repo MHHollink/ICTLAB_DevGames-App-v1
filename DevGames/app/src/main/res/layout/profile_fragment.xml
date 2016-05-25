@@ -102,10 +102,9 @@
                     android:textColor="@color/mineral"
                     android:textStyle="italic"
                     android:textSize="15sp"
-                    android:layout_marginStart="16dp"
                     android:gravity="center_vertical|end"
                     android:layout_below="@+id/txt_score"
-                    android:layout_toEndOf="@+id/project_icon" />
+                    android:layout_alignStart="@+id/txt_score" />
 
                 <TextView
                     android:id="@+id/projects"
@@ -117,9 +116,8 @@
                     android:textStyle="italic"
                     android:textSize="15sp"
                     android:gravity="center_vertical|end"
-                    android:layout_below="@+id/txt_score"
-                    android:layout_toEndOf="@+id/txt_projects"
-                    android:layout_marginStart="8dp" />
+                    android:layout_below="@+id/scores"
+                    android:layout_alignStart="@+id/scores" />
 
                 <ImageView
                     android:layout_width="24dp"
@@ -140,11 +138,10 @@
                     android:textColor="@color/mineral"
                     android:textStyle="italic"
                     android:textSize="15sp"
-                    android:layout_marginStart="16dp"
                     android:layout_alignWithParentIfMissing="false"
                     android:gravity="center_vertical|end"
                     android:layout_alignParentBottom="true"
-                    android:layout_toEndOf="@+id/commit_icon" />
+                    android:layout_alignStart="@+id/txt_projects" />
 
                 <TextView
                     android:id="@+id/commits"
@@ -158,8 +155,7 @@
                     android:layout_alignWithParentIfMissing="false"
                     android:gravity="center_vertical|end"
                     android:layout_alignParentBottom="true"
-                    android:layout_toEndOf="@+id/txt_commits"
-                    android:layout_marginStart="8dp" />
+                    android:layout_alignStart="@+id/projects" />
 
             </RelativeLayout>
 

@@ -28,7 +28,12 @@ import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
 /**
- * The App's context holding some data like the logged in user
+ * The main context for the application. The {@linkplain DevGamesApplication} contains static information and instances that are used over the whole app.
+ *
+ * This class contains a reference to the {@link #loggedInUser} that is used as base point for most of the requests send to the DevGames Server.
+ * The class also contains a reference to the {@link DevGamesClient} and the {@link DBHelper} which are both used for the data in the app.
+ *
+ * @author Marcel Hollink
  */
 public class DevGamesApplication extends Application {
 
@@ -36,6 +41,9 @@ public class DevGamesApplication extends Application {
      * The key point to the key-value pair for the session in each request header
      */
     public static final String SESSION_HEADER_KEY = "SESSION_ID";
+    /**
+     * The value of the key-value pair in the Session Request header
+     */
     private String session = null;
 
     private static final long DEFAULT_CONNECTION_TIMEOUT = 60 * 1000L;
@@ -44,11 +52,26 @@ public class DevGamesApplication extends Application {
     /**
      * Date formats used throughout the entire app to keep it on a consistent basis
      */
-    public SimpleDateFormat formatterHourMinute, formatterDayMonthYear, formatterDayMonthHourMinute;
+    public SimpleDateFormat formatterHourMinute, formatterDayMonthYear, formatterDayMonthHourMinute, formatterDayMonthYearHourMinute;
 
+    /**
+     * Instance of the preference manager that is used to access the {@link android.content.SharedPreferences}
+     */
     private PreferenceManager preferenceManager;
+
+    /**
+     * Instance of the {@link DevGamesClient} that contains all the call to the REST api
+     */
     private DevGamesClient devGamesClient;
+
+    /**
+     * Instance of the {@link DBHelper} that knows all the {@link Dao}'s
+     */
     private DBHelper dbHelper;
+
+    /**
+     * Instance of a {@link User} that contains the information about the user that is currently logged in
+     */
     private User loggedInUser;
 
     @SuppressLint("SimpleDateFormat")
@@ -68,7 +91,7 @@ public class DevGamesApplication extends Application {
 
             loggedInUser = (loggedInUserUuid != null && !loggedInUserUuid.isEmpty()) ?
                     getUser(Long.valueOf(loggedInUserUuid)) :
-                    getUser(0l);
+                    getUser(0L);
 
             L.d("loaded app, loggedInUser={0}", loggedInUser);
         }
@@ -79,6 +102,7 @@ public class DevGamesApplication extends Application {
         formatterHourMinute = new SimpleDateFormat(getString(R.string.date_HH_mm));
         formatterDayMonthYear = new SimpleDateFormat(getString(R.string.date_dd_MM_yyyy));
         formatterDayMonthHourMinute = new SimpleDateFormat(getString(R.string.date_dd_MMM_HH_mm));
+        formatterDayMonthYearHourMinute = new SimpleDateFormat(getString(R.string.date_dd_MMM_yy_HH_mm));
 
         devGamesClient = new RestAdapter.Builder()
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -170,12 +194,17 @@ public class DevGamesApplication extends Application {
         return devGamesClient;
     }
 
+    /**
+     * Gets the instance of the DBHelper class that contains the DAO's
+     *
+     * @return instance of the DBHelper
+     */
     public DBHelper getDbHelper() {
         return dbHelper;
     }
 
     /**
-     * Get a {@link User} by its id
+     * Get a {@link User} from the local database that is queried by its id
      *
      * @param id
      *         The id of the User

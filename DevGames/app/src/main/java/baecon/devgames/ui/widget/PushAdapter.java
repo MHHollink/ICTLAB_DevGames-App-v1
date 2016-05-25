@@ -25,6 +25,8 @@ public class PushAdapter extends ModelListAdapter<Push> {
 
     public PushAdapter(Context context, SortOption<Push> defaultSortOption) {
         super(context, defaultSortOption);
+
+        setHeadersEnabled(false);
     }
 
     @Override
@@ -56,7 +58,7 @@ public class PushAdapter extends ModelListAdapter<Push> {
 
             holder.txtName.setText(
                     push.getCommits() != null && push.getCommits().size() != 0 ?
-                            push.getCommits().iterator().next().getTitle()
+                            push.getCommits().iterator().next().getTitle().substring(0,20).concat("...")
                             : getContext().getString(R.string.no_name_available)
             );
 
@@ -78,7 +80,7 @@ public class PushAdapter extends ModelListAdapter<Push> {
 
             holder.txtTime.setText(
                     DevGamesApplication.get(getContext())
-                            .formatterDayMonthHourMinute.format(new Date(push.getTimestamp()))
+                            .formatterDayMonthYearHourMinute.format(new Date(push.getTimestamp()))
             );
         }
     }

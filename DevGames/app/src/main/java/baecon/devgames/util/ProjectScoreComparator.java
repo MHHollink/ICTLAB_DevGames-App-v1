@@ -11,8 +11,8 @@ public class ProjectScoreComparator implements Comparator<Project> {
 
     @Override
     public int compare(Project a, Project b) {
-        double aScore = a != null ? a.getScore() : 0;
-        double bScore = b != null ? b.getScore() : 0;
+        double aScore = a != null ? a.getDevelopers().size() : 0;
+        double bScore = b != null ? b.getDevelopers().size() : 0;
 
         // ascending order
         return aScore > bScore ? -1 : 1;

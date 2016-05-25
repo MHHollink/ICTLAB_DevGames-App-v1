@@ -156,8 +156,7 @@
                     android:layout_alignWithParentIfMissing="false"
                     android:gravity="center_vertical|end"
                     android:layout_alignParentBottom="true"
-                    android:layout_toEndOf="@+id/txt_commits"
-                    android:layout_marginStart="8dp" />
+                    android:layout_alignStart="@+id/developers" />
 
             </RelativeLayout>
 
